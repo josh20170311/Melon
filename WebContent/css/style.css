@@ -41,7 +41,25 @@ form, .content {
 }
 .signup-group input {
   height: 30px;
-  width: 93%;
+  width: 100%;
+  margin: 10px 0px 10px 0px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  font-size:14px;
+}
+.signup-group select {
+  height: 30px;
+  width: 100%;
+  margin: 10px 0px 10px 0px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  font-size:14px;
+}
+.signup-group textarea {
+  height: 200px;
+  width: 100%;
   padding: 5px 10px;
   border-radius: 5px;
   border: 1px solid gray;

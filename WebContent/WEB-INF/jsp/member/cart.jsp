@@ -7,7 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>Home</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 
@@ -90,7 +90,7 @@
 
 	<footer style="margin-top: 40px;">
 		<div class="footer">
-	      <a href="Controller?page=index"> Melon.com</a>
+	      <a href="Controller?page=index"> Melon</a>
 	    </div>
 	</footer>
 

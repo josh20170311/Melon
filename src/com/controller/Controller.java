@@ -38,7 +38,7 @@ public class Controller extends HttpServlet {
 			 session.setAttribute("cartlist", cartlist);
 			 session.setAttribute("list", list);
 			
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
 		}else {
 			doPost(request, response);
 		}
@@ -47,10 +47,10 @@ public class Controller extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String page = request.getParameter("page");
 		if(page.equals("login")) {
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/jsp/member/login.jsp").forward(request, response);
 			
 		}else if(page.equals("sign-up")) {
-			request.getRequestDispatcher("signup.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/jsp/member/signup.jsp").forward(request, response);
 			
 		}else if(page.equals("sign-up-form")) {
 			doSignUpForm(request,response);//副程式
@@ -67,7 +67,7 @@ public class Controller extends HttpServlet {
 			 session.setAttribute("cartlist", cartlist);
 			 session.setAttribute("list", list);
 			
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
 		}else if(page.equals("mobiles") || page.equals("laptops") || page.equals("clothing") || page.equals("home-decor") || page.equals("all-products")) {
 			DB db = new DB();
 			 try {
@@ -80,17 +80,17 @@ public class Controller extends HttpServlet {
 			request.setAttribute("list", list);
 			
 			if(page.equals("mobiles"))
-				request.getRequestDispatcher("mobiles.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/mobiles.jsp").forward(request, response);
 			if(page.equals("laptops"))
-				request.getRequestDispatcher("laptops.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/laptops.jsp").forward(request, response);
 			if(page.equals("clothing"))
-				request.getRequestDispatcher("clothing.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/clothing.jsp").forward(request, response);
 			if(page.equals("home-decor"))
-				request.getRequestDispatcher("home-decor.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/home-decor.jsp").forward(request, response);
 			if(page.equals("all-products"))
-				request.getRequestDispatcher("all-products.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/all-products.jsp").forward(request, response);
 		}else if(page.equals("showcart")) {
-			request.getRequestDispatcher("cart.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/jsp/member/cart.jsp").forward(request, response);
 		}else if(page.equals("addtocart")) {
 			String id = request.getParameter("id");
 			String action = request.getParameter("action");
@@ -105,20 +105,20 @@ public class Controller extends HttpServlet {
 			}
 			
 			if(action.equals("index"))
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
 			if(action.equals("allproducts"))
-				request.getRequestDispatcher("all-products.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/all-products.jsp").forward(request, response);
 			if(action.equals("clothing"))
-				request.getRequestDispatcher("clothing.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/clothing.jsp").forward(request, response);
 			if(action.equals("home-decor"))
-				request.getRequestDispatcher("home-decor.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/home-decor.jsp").forward(request, response);
 			if(action.equals("laptops"))
-				request.getRequestDispatcher("laptops.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/laptops.jsp").forward(request, response);
 			if(action.equals("mobiles"))
-				request.getRequestDispatcher("mobiles.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/mobiles.jsp").forward(request, response);
 		}else if(page.equals("success")) {
 			
-			request.getRequestDispatcher("success.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/jsp/member/success.jsp").forward(request, response);
 			
 			/*session = request.getSession();
 			 cartlist.clear();
@@ -130,7 +130,7 @@ public class Controller extends HttpServlet {
 			
 			session = request.getSession();
 			session.setAttribute("cartlist", cartlist);
-			request.getRequestDispatcher("cart.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/jsp/member/cart.jsp").forward(request, response);
 		}else if(page.equals("price-sort")) {
 			String price = request.getParameter("sort");
 			String action = request.getParameter("action");
@@ -143,17 +143,25 @@ public class Controller extends HttpServlet {
 			session.setAttribute("list", list);
 			
 			if(action.equals("index"))
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
 			if(action.equals("all-products"))
-				request.getRequestDispatcher("all-products.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/all-products.jsp").forward(request, response);
 			if(action.equals("mobiles"))
-				request.getRequestDispatcher("mobiles.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/mobiles.jsp").forward(request, response);
 			if(action.equals("laptops"))
-				request.getRequestDispatcher("laptops.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/laptops.jsp").forward(request, response);
 			if(action.equals("clothing"))
-				request.getRequestDispatcher("clothing.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/clothing.jsp").forward(request, response);
 			if(action.equals("home-decor"))
-				request.getRequestDispatcher("home-decor.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/jsp/member/home-decor.jsp").forward(request, response);
+		}else if(page.equals("articles")) {
+			request.getRequestDispatcher("WEB-INF/jsp/member/articles.jsp").forward(request,response);
+		}else if(page.equals("myarticles")) {
+			request.getRequestDispatcher("WEB-INF/jsp/member/myarticles.jsp").forward(request,response);
+		}else if(page.equals("addarticle")) {
+			request.getRequestDispatcher("WEB-INF/jsp/member/addArticle.jsp").forward(request,response);
+			
+			
 		}
 	}
 	private void doSignUpForm(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
@@ -185,7 +193,7 @@ public class Controller extends HttpServlet {
 			
 			request.setAttribute("username", username);
 			request.setAttribute("msg", "Account created successfully, Please Login!");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/jsp/member/login.jsp").forward(request, response);
 			
 		}else {
 			request.setAttribute("msg", "The two passwords do not match");
@@ -193,7 +201,7 @@ public class Controller extends HttpServlet {
 			request.setAttribute("address", address);
 			request.setAttribute("email", email);
 			request.setAttribute("username", username);
-			request.getRequestDispatcher("signup.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/jsp/member/signup.jsp").forward(request, response);
 		}
 		
 	}
@@ -225,11 +233,11 @@ public class Controller extends HttpServlet {
 			session.setAttribute("email", user.fetchemail(userList,username));
 			session.setAttribute("name", user.fetchname(userList,username));
 			session.setAttribute("username", username);
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
 		}else {//如果帳號密碼錯誤
 			request.setAttribute("msg", "Invalid Crediantials");
 			request.setAttribute("username", username);
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/jsp/member/login.jsp").forward(request, response);
 		}
 		
 	}

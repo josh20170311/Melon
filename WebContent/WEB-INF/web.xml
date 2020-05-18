@@ -24,4 +24,24 @@
     <servlet-name>AdminController</servlet-name>
     <url-pattern>/admin</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogisticsController</display-name>
+    <servlet-name>LogisticsController</servlet-name>
+    <servlet-class>com.controller.LogisticsController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogisticsController</servlet-name>
+    <url-pattern>/LogisticsController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManufacturerController</display-name>
+    <servlet-name>ManufacturerController</servlet-name>
+    <servlet-class>com.controller.ManufacturerController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManufacturerController</servlet-name>
+    <url-pattern>/ManufacturerController</url-pattern>
+  </servlet-mapping>
 </web-app>

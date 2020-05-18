@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Home</title>
+<title>My Articles</title>
 <link 
 	rel="stylesheet" 
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
@@ -15,6 +16,7 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+
 	
 	<%--設定購物車_開始 --%>
 	<c:set var="x" value="0"></c:set>
@@ -32,6 +34,7 @@
 			<ul>
 				<li><input type="text"  name="search"  placeHolder="Search"/></li>
 				<li><a href="Controller?page=index">Home</a></li>
+				<li><a href="Controller?page=articles">Articles</a></li>
 				<c:choose>
 					<c:when test="${session == null}">
 						<li><a href="Controller?page=login">Login</a></li>
@@ -40,6 +43,7 @@
 					<c:when test="${session != null}">
 						<li><a href="Controller?page=logout" style="color: #F24638;">Logout</a></li>
 						<li><a href="#">My Account(<c:out value="${username }"></c:out>)</a></li>
+						<li><a href=Controller?page=myarticles>My Articles</a></li>
 					</c:when>
 				</c:choose>
 				<li><a href="Controller?page=showcart">cart(<c:out value="${x}"/>)</a></li>
@@ -71,6 +75,7 @@
  				<div class="col-md-8">
  					
  					<%-- 排序功能_開始  --%>
+ 					<a class="btn btn-primary" href="Controller?page=addarticle">Add Article</a>
 					<h5>Sort by(Price):</h5>
 					<form action="Controller" method="get" 
 										style="border: none;margin:0px;padding: 0px;margin-bottom: 20px;">
@@ -106,7 +111,7 @@
 	
 	<footer>
 		<div class="footer">
-	      <a href="Controller?page=index"> Melon.com</a>
+	      <a href="Controller?page=index"> Melon</a>
 	    </div>
 	</footer>
 	
