@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.beans.Product;
-import com.beans.User;
+import com.beans.*;
+import java.sql.Date;
 
 
 public class DB {
@@ -16,7 +16,7 @@ public class DB {
 	private String username = "root";
 	private String password = "1234";
 	private String dbName = "myproject";
-	private String url = "jdbc:mysql://localhost:3306/" + dbName + "?serverTimezone=UTC";
+	private String url = "jdbc:mysql://localhost:3306/" + dbName + "?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8";
 	private String driver = "com.mysql.cj.jdbc.Driver";
 	
 	ArrayList<Product> list = new ArrayList<>();
@@ -24,6 +24,7 @@ public class DB {
 	
 	private Connection con;
 	private void dbConnect() {
+		
 		try {
 			Class.forName(driver);
 			
@@ -62,6 +63,28 @@ public class DB {
 		st.executeUpdate();
 		dbClose();
 	}
+	
+	public void addArticle(Article article) throws SQLException {
+		dbConnect();
+		String sql = "Insert into article("
+				+ "articleTitle,"
+				+ "articleContent,"
+				+ "articleUploadTime,"
+				+ "articleAuthorId,"
+				+ "articleProductId"
+				+ ") values(?,?,?,?,?)";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setString(1, article.getTitle());
+		st.setString(2, article.getContent());
+		st.setObject(3, article.getUploadTime());
+		st.setInt(4, article.getAuthorId());
+		st.setInt(5, article.getProductId());
+		
+		
+		st.executeUpdate();
+		dbClose();
+	}
 
 	public boolean checkUser(String username, String password) throws SQLException {
 		dbConnect();
@@ -80,9 +103,9 @@ public class DB {
 		
 		dbClose();
 		if(count == 0)
-			return false;//¬dµL¦¹¤H ¦^¶Çfalse
+			return false;//ï¿½dï¿½Lï¿½ï¿½ï¿½H ï¿½^ï¿½ï¿½false
 		
-		return true;//±b¸¹±K½X¥¿½T ¦^¶Çtrue
+		return true;//ï¿½bï¿½ï¿½ï¿½Kï¿½Xï¿½ï¿½ï¿½T ï¿½^ï¿½ï¿½true
 	}
 
 	public ArrayList<Product> fetch() throws SQLException {

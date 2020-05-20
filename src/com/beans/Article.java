@@ -7,20 +7,28 @@ public class Article {
 	private String title;
 	private String content;
 	private int authorId;
-	private String category;
-	private Date postTime;
+	private int productId;
+	private Date uploadTime;
 	
-	public String getCategory() {
-		return category;
+	public Article(String title, String content, Date uploadTime, int authorId, int productId) {
+		this.title = title;
+		this.content = content;
+		this.authorId = authorId;
+		this.productId = productId;
+		this.uploadTime = uploadTime;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	
+	public int getProductId() {
+		return productId;
 	}
-	public Date getPostTime() {
-		return postTime;
+	public void setProductID(int productId) {
+		this.productId = productId;
 	}
-	public void setPostTime(Date postTime) {
-		this.postTime = postTime;
+	public Date getUploadTime() {
+		return uploadTime;
+	}
+	public void setUploadTime(Date uploadTime) {
+		this.uploadTime = uploadTime;
 	}
 	
 	public int getId() {

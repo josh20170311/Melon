@@ -18,7 +18,7 @@ public class AdminController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String page = request.getParameter("page");
 		if(page == null) {
-			request.getRequestDispatcher("admin/login.jsp").forward(request, response);;
+			request.getRequestDispatcher("/WEB-INF/jsp/admin/login.jsp").forward(request, response);;
 		}else {
 			doPost(request, response);
 		}
@@ -33,13 +33,13 @@ public class AdminController extends HttpServlet {
 			
 			
 			if(username.equals("admin") && password.equals("admin@1234")) {
-				request.getRequestDispatcher("admin/index.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
 
 			}
 			else {
 				request.setAttribute("msg", "Invalid Crediantials");
 				request.setAttribute("username", username);
-				request.getRequestDispatcher("admin/login.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/jsp/admin/login.jsp").forward(request, response);
 
 			}
 		}
@@ -55,16 +55,16 @@ public class AdminController extends HttpServlet {
 			}
 			
 			JOptionPane.showMessageDialog(null, "Product deleted successfully", "Info", JOptionPane.INFORMATION_MESSAGE);
-			request.getRequestDispatcher("admin/index.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
 
 		}
 		
 		if(page.equals("index")) {
-			request.getRequestDispatcher("admin/index.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
 		}
 		
 		if(page.equals("addproduct")) {
-			request.getRequestDispatcher("admin/addProduct.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/admin/addProduct.jsp").forward(request, response);
 		}
 		
 		if(page.equals("edit")) {
@@ -79,7 +79,7 @@ public class AdminController extends HttpServlet {
 			}
 			
 			request.setAttribute("p", p);
-			request.getRequestDispatcher("admin/editProduct.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/admin/editProduct.jsp").forward(request, response);
 		}
 		
 		if(page.equals("edit_product")){
@@ -103,7 +103,7 @@ public class AdminController extends HttpServlet {
 				e.printStackTrace();
 			}
 			JOptionPane.showMessageDialog(null, "Product details updated successfully", "Info", JOptionPane.INFORMATION_MESSAGE);
-			request.getRequestDispatcher("admin/index.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
 		}
 		
 		if(page.equals("add_product")){
@@ -127,7 +127,7 @@ public class AdminController extends HttpServlet {
 				e.printStackTrace();
 			}
 			JOptionPane.showMessageDialog(null, "Product added Successfully", "Info", JOptionPane.INFORMATION_MESSAGE);
-			request.getRequestDispatcher("admin/index.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
 		}
 	}
 

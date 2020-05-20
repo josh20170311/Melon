@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=utf8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -56,7 +56,7 @@
  		<div class="row"><%//bootstrap  %>
  		
  				<%--左側選單_開始 --%>
- 				<div class="col-md-4"><%//bootstrap  %>
+ 				<div class="col-md-2"><%//bootstrap  %>
  						<div class="list-group">
 								  <a href="#" class="list-group-item" style="background:  #e8f29d;">
 								    All Products
@@ -91,7 +91,7 @@
 		 					<div class="col-md-4">
 		 						<img src="${product.getImage() }" class="img-responsive" ><br>
 		 						<div class="text-center"><a style="color: black;"><c:out value="${product.getName() }"></c:out></a></div>	
-		 						<p style="text-align: center;"> &#x20b9;  <c:out value="${ product.getPrice() }"></c:out></p>
+		 						<p style="text-align: center;"> $  <c:out value="${ product.getPrice() }"></c:out></p>
 		 						
 		 						<div class="text-center">  
 		 							<a class="btn btn-primary" href="Controller?page=addtocart&action=index&id=<c:out value="${product.getId()}"/>">Add to Cart</a> 

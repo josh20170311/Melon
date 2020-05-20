@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 
-import com.beans.Product;
-import com.beans.User;
+import com.beans.*;
 import com.model.DB;
+import java.util.Date;
 
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,12 +23,21 @@ public class Controller extends HttpServlet {
 	HttpSession session;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		request.setCharacterEncoding("UTF-8");
 		String page = request.getParameter("page");
 		if(page == null || page.equals("index")) {
 			
 			DB db = new DB();
 			 try {
 				list = db.fetch();
+				//db Testing =====================================================
+				db.addArticle(new Article("testt","testc",new Date(),25,1));
+				
+				
+				
+				
+				//db Testing =====================================================
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -45,6 +54,8 @@ public class Controller extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		request.setCharacterEncoding("UTF-8");
 		String page = request.getParameter("page");
 		if(page.equals("login")) {
 			request.getRequestDispatcher("WEB-INF/jsp/member/login.jsp").forward(request, response);
@@ -53,10 +64,10 @@ public class Controller extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/jsp/member/signup.jsp").forward(request, response);
 			
 		}else if(page.equals("sign-up-form")) {
-			doSignUpForm(request,response);//∞∆µ{¶°
+			doSignUpForm(request,response);//ÂâØÁ®ãÂºè
 			
 		}else if(page.equals("login-form")) {
-			doLoginForm(request,response);//∞∆µ{¶°
+			doLoginForm(request,response);//ÂâØÁ®ãÂºè
 			
 		}else if(page.equals("logout")) {
 			session = request.getSession();
@@ -159,9 +170,27 @@ public class Controller extends HttpServlet {
 		}else if(page.equals("myarticles")) {
 			request.getRequestDispatcher("WEB-INF/jsp/member/myarticles.jsp").forward(request,response);
 		}else if(page.equals("addarticle")) {
-			request.getRequestDispatcher("WEB-INF/jsp/member/addArticle.jsp").forward(request,response);
-			
-			
+			if("POST".equals(request.getMethod())) {
+				System.out.println((int)(request.getSession().getAttribute("userId")));
+				System.out.println((request.getParameter("productId")));
+				DB db = new DB();
+				try {
+					String title = request.getParameter("title");
+					String content = request.getParameter("content");
+					System.out.println(title+"\t"+content);
+				db.addArticle(new Article(title,
+										content,
+										new Date(),
+										(int)(request.getSession().getAttribute("userId")),
+										Integer.parseInt(request.getParameter("productId"))
+										)
+						);
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}else {
+				request.getRequestDispatcher("WEB-INF/jsp/member/addArticle.jsp").forward(request,response);
+			}
 		}
 	}
 	private void doSignUpForm(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
@@ -220,7 +249,7 @@ public class Controller extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(status) {//¶p™G±b∏π±KΩX•øΩT
+		if(status) {//ÔøΩpÔøΩGÔøΩbÔøΩÔøΩÔøΩKÔøΩXÔøΩÔøΩÔøΩT
 			session = request.getSession();
 			session.setAttribute("session", session);
 			
@@ -232,9 +261,10 @@ public class Controller extends HttpServlet {
 			session.setAttribute("address", user.fetchadd(userList,username));
 			session.setAttribute("email", user.fetchemail(userList,username));
 			session.setAttribute("name", user.fetchname(userList,username));
+			session.setAttribute("userId",user.fetchid(userList,username));
 			session.setAttribute("username", username);
 			request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
-		}else {//¶p™G±b∏π±KΩXø˘ª~
+		}else {//ÔøΩpÔøΩGÔøΩbÔøΩÔøΩÔøΩKÔøΩXÔøΩÔøΩÔøΩ~
 			request.setAttribute("msg", "Invalid Crediantials");
 			request.setAttribute("username", username);
 			request.getRequestDispatcher("WEB-INF/jsp/member/login.jsp").forward(request, response);
