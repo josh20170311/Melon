@@ -56,13 +56,9 @@
  				<%--左側選單_開始 --%>
  				<div class="col-md-4"><%//bootstrap  %>
  						<div class="list-group">
-								  <a href="#" class="list-group-item" style="background:  #e8f29d;">
-								    All Products
-								  </a>
-								  <a href="#" class="list-group-item">Apple</a>
-								  <a href="#" class="list-group-item">Asus</a>
-								  <a href="#" class="list-group-item">Samsung</a>
-								  <a href="#" class="list-group-item">Xiaomi</a>
+								<c:forEach items="${titleList}" var="title">
+									<c:out value="${title.getTitle()}"></c:out><br>
+								</c:forEach>
 						</div> 
  				</div>
 				<%--左側選單_結束 --%>
@@ -84,19 +80,8 @@
 					</form>
 					<%-- 排序功能_結束  --%>
 					
-					<%-- 產生產品清單_開始  --%>
- 					<c:forEach items="${list }" var="product">
-		 					<div class="col-md-4">
-		 						<img src="${product.getImage() }" class="img-responsive" ><br>
-		 						<div class="text-center"><a style="color: black;"><c:out value="${product.getName() }"></c:out></a></div>	
-		 						<p style="text-align: center;"> &#x20b9;  <c:out value="${ product.getPrice() }"></c:out></p>
-		 						
-		 						<div class="text-center">  
-		 							<a class="btn btn-primary" href="Controller?page=addtocart&action=index&id=<c:out value="${product.getId()}"/>">Add to Cart</a> 
-		 						</div><br>
-		 					</div>
- 					</c:forEach>
- 					<%-- 產生產品清單_結束  --%>
+					
+
  				</div>
  				<%--右側欄_結束 --%>
  			</div>
