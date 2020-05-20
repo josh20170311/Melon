@@ -6,9 +6,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Add Product</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="/Melon/css/style.css">
 </head>
 <body>
 	<header>
@@ -26,41 +26,40 @@
 	</header>
 	
 	<div class="signup-header">
-	 	<h2>Edit Product</h2>
+	 	<h2>Add Product</h2>
 	 </div>
 
 	 <form method="post" action="admin">
 	 
-	 <input type="hidden" name="page" value="edit_product">
-	 <input type="hidden" name="id" value="<c:out value="${p.getId() }"/>">
+	 <input type="hidden" name="page" value="add_product">
      
 	 	<div class="signup-group">
 	 		<label>Name</label>
-	 		<input type="text" name="name" value="<c:out value="${p.getName() }"></c:out>" required>
+	 		<input type="text" name="name" placeholder="product name goes here"  required>
 	 	</div>
 	 	<div class="signup-group">
 	 		<label>Price</label>
-	 		<input type="text" name="price" value="<c:out value="${p.getPrice() }"></c:out>" required>
+	 		<input type="text" name="price" placeholder="product price" required>
 	 	</div>
 	 	<div class="signup-group">
 	 		<label>Category</label>
-	 		<input type="text" name="category" value="<c:out value="${p.getCategory() }"></c:out>" required>
+	 		<input type="text" name="category" placeholder="product category" required>
 	 	</div>
 	 	
 	 	<div class="signup-group">
 	 		<label>Featured</label>
-	 		<input type="text" name="featured" value="<c:out value="${p.getFeatured() }"></c:out>" required>
+	 		<input type="text" name="featured" placeholder="yes/no" required>
 	 	</div>
 	 	<div class="signup-group">
-	 		<label>Image</label>
-	 		<img style="height: 160px;width: 160px;" src="<c:out value="${p.getImage() }"></c:out>">
+	 		 <label for="fileupload"> Select an image to upload</label>
+	 		<input type="file" name="image" required><br>
 	 	</div>
 	 	<div class="signup-group">
 			<input type="submit" value="Process">	 
 		</div>
 	 </form>
 	
-	 <footer>
+	 <footer style="position: absolute;left: 0;bottom: 0;width: 100%;">
 		<div class="footer"> &copy; 2018 Copyright:
 	      Tiazon.com
 	    </div>

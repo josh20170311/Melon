@@ -73,7 +73,7 @@ public class AdminController extends HttpServlet {
 			DB account = new DB();
 			Product p = null;
 			try {
-				p = account.fetchProduct(id);
+				p = account.getProduct(id);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

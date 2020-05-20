@@ -6,7 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="/Melon/css/style.css">
 </head>
 <body>
 
@@ -14,7 +14,7 @@
 	 	<h2> <mark>Admin</mark> Login</h2>
 	</div>
 
-<form method="post" action="admin">
+<form method="post" action="/admin">
 	 
 	 <input type="hidden" name="page" value="admin-login-form">
 	 

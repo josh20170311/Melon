@@ -163,7 +163,7 @@ public class DB {
 	}
 
 	/**
-	 * get article informations List but not includes article content
+	 * 怕內容太大讀太久,先抓文章資訊做出列表, 之後再用getArticle(id)抓文章內容
 	 * 
 	 * @return ArrayList<Article>
 	 * @throws SQLException
@@ -171,28 +171,27 @@ public class DB {
 	public ArrayList<Article> fetchArticleInfos() throws SQLException {
 		dbConnect();
 
-		String sql = "Select articleId, articleTitle, articleUploadTime, articleProductId, articleAuthorId from article;";
+		String sql = "Select articleId, articleTitle, articleUploadTime, articleProductId, articleAuthorId from article where audited=1;";
 		PreparedStatement st = con.prepareStatement(sql);
 		ResultSet rs = st.executeQuery();
 		System.out.println();
-		System.out.println("in fetch titles");
+		System.out.println("in fetchArticleInfos");
 
 		while (rs.next()) {
 			int id = rs.getInt("articleId");
 			int authorid = rs.getInt("articleAuthorId");
 			int productid = rs.getInt("articleProductId");
-			java.sql.Date d = rs.getDate("articleUploadTime");
-			java.sql.Time t = rs.getTime("articleUploadTime");
+			Date t = (Date) rs.getObject("articleUploadTime");
 			String title = rs.getString("articleTitle");
 
 			Article article = new Article();
 			article.setTitle(title);
 			article.setId(id);
 			article.setAuthorId(authorid);
-			article.setProductID(productid);
+			article.setProductId(productid);
 			Date javaDate = new Date(t.getTime());
 
-			article.setUploadTime(javaDate);
+			article.setUploadTime(t);
 			System.out.println(article);
 
 			titleList.add(article);
@@ -201,6 +200,69 @@ public class DB {
 
 		dbClose();
 		return titleList;
+	}
+
+	/**
+	 * 
+	 * 使用者點擊文章標題後 顯示文章內容
+	 * 
+	 * 
+	 * @param id
+	 * @return article
+	 * @throws SQLException
+	 */
+	public Article getArticle(int id) throws SQLException {
+		dbConnect();
+
+		Article article = new Article();
+		String sql = "SELECT * FROM article where articleId = ?;";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, id);
+		ResultSet rs = st.executeQuery();
+		System.out.println();
+		System.out.println("in getArticle");
+
+		while (rs.next()) {
+			article.setId(id);
+			article.setAuthorId(rs.getInt("articleAuthorId"));
+			article.setProductId(rs.getInt("articleProductId"));
+			article.setContent(rs.getString("articleContent"));
+			article.setTitle(rs.getString("articleTitle"));
+			article.setUploadTime((Date) rs.getObject("articleUploadTime"));
+			System.out.println(article.toInfoString());
+		}
+		dbClose();
+
+		User u = getUser(article.getAuthorId());
+		Product p = getProduct(article.getProductId() + "");
+		article.setAuthorName(u.getName());
+		article.setProductName(p.getName());
+
+		return article;
+	}
+
+	public User getUser(int id) throws SQLException {
+		dbConnect();
+		User u = new User();
+
+		String sql = "SELECT * FROM user where id = ?;";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, id);
+		ResultSet rs = st.executeQuery();
+		System.out.println();
+		System.out.println("in getUser");
+
+		while (rs.next()) {
+			u.setId(id);
+			u.setName(rs.getString("name"));
+			u.setEmail(rs.getString("email"));
+			u.setAddress(rs.getString("address"));
+			u.setUsername("username");
+			u.setPassword("password");
+			System.out.println(u);
+		}
+		dbClose();
+		return u;
 	}
 
 	public void deleteProduct(String id) throws SQLException {
@@ -214,7 +276,7 @@ public class DB {
 
 	}
 
-	public Product fetchProduct(String id) throws SQLException {
+	public Product getProduct(String id) throws SQLException {
 		dbConnect();
 		String sql = "select * from product where id=?";
 		PreparedStatement pstmt = con.prepareStatement(sql);

@@ -3,6 +3,7 @@
     
 <%response.setCharacterEncoding("UTF-8");%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
     
 <!DOCTYPE html>
 <html>
@@ -50,14 +51,14 @@
 	
 	<%--主要內容_開始 --%>
 	<div class="tiazon-content"><%//style.css  %>
- 	<div class="container"><%//bootstrap  %>
+		
  		<div class="row"><%//bootstrap  %>
  		
  				<%--左側選單_開始 --%>
  				<div class="col-md-4"><%//bootstrap  %>
  						<div class="list-group">
 								<c:forEach items="${titleList}" var="title">
-									<c:out value="${title.getTitle()}"></c:out><br>
+									<a href="Controller?page=articles&articleid=${title.getId()}" class="btn btn-primary" style="white-space: pre-wrap;word-wrap: break-word;"><c:out value="${title.getTitle()}"></c:out></a><br>
 								</c:forEach>
 						</div> 
  				</div>
@@ -66,25 +67,21 @@
 				<%--右側欄_開始 --%>
  				<div class="col-md-8">
  					
- 					<%-- 排序功能_開始  --%>
-					<h5>Sort by(Price):</h5>
-					<form action="Controller" method="get" 
-										style="border: none;margin:0px;padding: 0px;margin-bottom: 20px;">
-							<input type="hidden" name="page" value="price-sort">
-							<input type="hidden" name="action" value="index">
-							<select name="sort">
-									<option value="low-to-high">Low to high</option>
-									<option value="high-to-high">high to low</option>
-							</select>
-							<input type="submit" value="Go!">
-					</form>
-					<%-- 排序功能_結束  --%>
+ 					
 					
+						<pre style="white-space: pre-wrap;word-wrap: break-word;">
+<c:out value="Title : ${article.getTitle() }"></c:out>
+<c:out value="Author : ${article.getAuthorName() }"></c:out>
+<c:out value="Product : ${article.getProductName() }"></c:out>
+<c:out value="Time : ${article.getUploadTime() }"></c:out>
+						</pre>
+						<pre style="white-space: pre-wrap;word-wrap: break-word;">
+<c:out value="${article.getContent()}"></c:out>
+						</pre>
 					
 
  				</div>
  				<%--右側欄_結束 --%>
- 			</div>
  		</div>
  	</div>
 	<%--主要內容_結束 --%>

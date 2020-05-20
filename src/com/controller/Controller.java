@@ -33,7 +33,7 @@ public class Controller extends HttpServlet {
 			try {
 				list = db.fetch();
 				// db Testing =====================================================
-				//db.addArticle(new Article("testt", "testc", new Date(), 25, 1));
+				// db.addArticle(new Article("testt", "testc", new Date(), 25, 1));
 
 				// db Testing =====================================================
 			} catch (SQLException e) {
@@ -169,16 +169,28 @@ public class Controller extends HttpServlet {
 			if (action.equals("home-decor"))
 				request.getRequestDispatcher("WEB-INF/jsp/member/home-decor.jsp").forward(request, response);
 		} else if (page.equals("articles")) {
+
+			int id = -1;
 			try {
 				DB db = new DB();
-				ArrayList<Article> titleList = db.fetchArticleInfos();
-				request.setAttribute("titleList", titleList);
 
+				ArrayList<Article> titleList = db.fetchArticleInfos();
+
+				if (request.getParameter("articleid") != null) {
+					id = Integer.parseInt(request.getParameter("articleid"));
+				} else {
+					id = titleList.get(0).getId();// get articleId
+				}
+
+				Article a = db.getArticle(id);
+
+				request.setAttribute("article", a);
+				request.setAttribute("titleList", titleList);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 			request.getRequestDispatcher("WEB-INF/jsp/member/articles.jsp").forward(request, response);
+
 		} else if (page.equals("myarticles")) {
 			request.getRequestDispatcher("WEB-INF/jsp/member/myarticles.jsp").forward(request, response);
 		} else if (page.equals("addarticle")) {

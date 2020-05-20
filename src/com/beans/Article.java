@@ -7,16 +7,21 @@ public class Article {
 	private String title;
 	private String content;
 	private int authorId;
+	private String authorName;
+	private String productName;
 	private int productId;
 	private Date uploadTime;
 
 	public Article() {
+		this.id = -1;
 		this.authorId = -1;
-		this.title = "";
-		this.content = "";
+		this.title = null;
+		this.content = null;
 		this.authorId = -1;
 		this.productId = -1;
 		this.uploadTime = new Date(0);
+		this.authorName = "";
+		this.productName = "";
 	}
 
 	public Article(String title, String content, Date uploadTime, int authorId, int productId) {
@@ -27,17 +32,38 @@ public class Article {
 		this.uploadTime = uploadTime;
 	}
 
+	public String getAuthorName() {
+		return authorName;
+	}
+
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", content=" + content + ", authorId=" + authorId
 				+ ", productId=" + productId + ", uploadTime=" + uploadTime + "]";
 	}
 
+	public String toInfoString() {
+		return "Article Info [id=" + id + ", title=" + title + ", authorId=" + authorId + ", productId=" + productId
+				+ ", uploadTime=" + uploadTime + "]";
+	}
+
 	public int getProductId() {
 		return productId;
 	}
 
-	public void setProductID(int productId) {
+	public void setProductId(int productId) {
 		this.productId = productId;
 	}
 

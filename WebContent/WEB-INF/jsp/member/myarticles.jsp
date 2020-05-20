@@ -54,58 +54,11 @@
 	
 	<%--主要內容_開始 --%>
 	<div class="tiazon-content"><%//style.css  %>
- 	<div class="container"><%//bootstrap  %>
- 		<div class="row"><%//bootstrap  %>
- 		
- 				<%--左側選單_開始 --%>
- 				<div class="col-md-4"><%//bootstrap  %>
- 						<div class="list-group">
-								  <a href="#" class="list-group-item" style="background:  #e8f29d;">
-								    All Products
-								  </a>
-								  <a href="#" class="list-group-item">Apple</a>
-								  <a href="#" class="list-group-item">Asus</a>
-								  <a href="#" class="list-group-item">Samsung</a>
-								  <a href="#" class="list-group-item">Xiaomi</a>
-						</div> 
- 				</div>
-				<%--左側選單_結束 --%>
-				
-				<%--右側欄_開始 --%>
- 				<div class="col-md-8">
- 					
- 					<%-- 排序功能_開始  --%>
- 					<a class="btn btn-primary" href="Controller?page=addarticle">Add Article</a>
-					<h5>Sort by(Price):</h5>
-					<form action="Controller" method="get" 
-										style="border: none;margin:0px;padding: 0px;margin-bottom: 20px;">
-							<input type="hidden" name="page" value="price-sort">
-							<input type="hidden" name="action" value="index">
-							<select name="sort">
-									<option value="low-to-high">Low to high</option>
-									<option value="high-to-high">high to low</option>
-							</select>
-							<input type="submit" value="Go!">
-					</form>
-					<%-- 排序功能_結束  --%>
-					
-					<%-- 產生產品清單_開始  --%>
- 					<c:forEach items="${list }" var="product">
-		 					<div class="col-md-4">
-		 						<img src="${product.getImage() }" class="img-responsive" ><br>
-		 						<div class="text-center"><a style="color: black;"><c:out value="${product.getName() }"></c:out></a></div>	
-		 						<p style="text-align: center;"> &#x20b9;  <c:out value="${ product.getPrice() }"></c:out></p>
-		 						
-		 						<div class="text-center">  
-		 							<a class="btn btn-primary" href="Controller?page=addtocart&action=index&id=<c:out value="${product.getId()}"/>">Add to Cart</a> 
-		 						</div><br>
-		 					</div>
- 					</c:forEach>
- 					<%-- 產生產品清單_結束  --%>
- 				</div>
- 				<%--右側欄_結束 --%>
- 			</div>
- 		</div>
+	 	<div class="container"><%//bootstrap  %>
+	 		<div class="row"><%//bootstrap  %>
+	 					<a class="btn btn-primary" href="Controller?page=addarticle">Add Article</a>
+			</div>
+	 	</div>
  	</div>
 	<%--主要內容_結束 --%>
 	

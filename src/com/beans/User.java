@@ -4,6 +4,12 @@ import java.util.ArrayList;
 
 public class User {
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", username=" + username + ", password="
+				+ password + ", address=" + address + "]";
+	}
+
 	private int id;
 	private String name;
 	private String email;

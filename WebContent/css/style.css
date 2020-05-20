@@ -90,6 +90,7 @@ header{
 }
 
 h1{
+	display:inline-block;
 	position:absolute;
 	padding:3px;
 	float:left;
