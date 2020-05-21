@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 
 import com.beans.*;
-import com.model.DB;
+import com.model.*;
 import java.util.Date;
 
 public class Controller extends HttpServlet {
@@ -29,13 +29,10 @@ public class Controller extends HttpServlet {
 		String page = request.getParameter("page");
 		if (page == null || page.equals("index")) {
 
-			DB db = new DB();
-			try {
-				list = db.fetch();
-				// db Testing =====================================================
-				// db.addArticle(new Article("testt", "testc", new Date(), 25, 1));
 
-				// db Testing =====================================================
+			try {
+				list = new ProductDAO().fetchProduct();
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -80,9 +77,9 @@ public class Controller extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
 		} else if (page.equals("mobiles") || page.equals("laptops") || page.equals("clothing")
 				|| page.equals("home-decor") || page.equals("all-products")) {
-			DB db = new DB();
+
 			try {
-				list = db.fetch();
+				list = new ProductDAO().fetchProduct();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -172,9 +169,9 @@ public class Controller extends HttpServlet {
 
 			int id = -1;
 			try {
-				DB db = new DB();
+				ArticleDAO articleDAO  = new ArticleDAO();
 
-				ArrayList<Article> titleList = db.fetchArticleInfos();
+				ArrayList<Article> titleList = articleDAO.fetchArticleInfos();
 
 				if (request.getParameter("articleid") != null) {
 					id = Integer.parseInt(request.getParameter("articleid"));
@@ -182,7 +179,7 @@ public class Controller extends HttpServlet {
 					id = titleList.get(0).getId();// get articleId
 				}
 
-				Article a = db.getArticle(id);
+				Article a = articleDAO.getArticle(id);
 
 				request.setAttribute("article", a);
 				request.setAttribute("titleList", titleList);
@@ -197,13 +194,13 @@ public class Controller extends HttpServlet {
 			if ("POST".equals(request.getMethod())) {
 				System.out.println((int) (request.getSession().getAttribute("userId")));
 				System.out.println((request.getParameter("productId")));
-				DB db = new DB();
+
 				try {
 					String title = request.getParameter("title");
 					String content = request.getParameter("content");
 					System.out.println(title + "\t" + content);
 
-					db.addArticle(
+					new ArticleDAO().addArticle(
 							new Article(title, content, new Date(), (int) (request.getSession().getAttribute("userId")),
 									Integer.parseInt(request.getParameter("productId"))));
 					request.getRequestDispatcher("WEB-INF/jsp/member/articles.jsp").forward(request, response);
@@ -236,9 +233,9 @@ public class Controller extends HttpServlet {
 			user.setUsername(username);
 			user.setPassword(password_1);
 
-			DB db = new DB();
+
 			try {
-				db.addUser(user);
+				new UserDAO().addUser(user);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -265,11 +262,11 @@ public class Controller extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
-		DB db = new DB();
+		UserDAO userDAO = new UserDAO();
 		User user = new User();
 		boolean status = false;
 		try {
-			status = db.checkUser(username, password);
+			status = userDAO.checkUser(username, password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -279,7 +276,7 @@ public class Controller extends HttpServlet {
 			session.setAttribute("session", session);
 
 			try {
-				userList = db.fetchUser();
+				userList = userDAO.fetchUser();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

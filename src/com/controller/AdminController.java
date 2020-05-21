@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
 
 import com.beans.Product;
-import com.model.DB;
+import com.model.*;
 
 public class AdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -46,9 +46,9 @@ public class AdminController extends HttpServlet {
 
 		if (page.equals("delete")) {
 			String id = request.getParameter("id");
-			DB db = new DB();
+			
 			try {
-				db.deleteProduct(id);
+				new ProductDAO().deleteProduct(id);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -70,10 +70,10 @@ public class AdminController extends HttpServlet {
 
 		if (page.equals("edit")) {
 			String id = request.getParameter("id");
-			DB account = new DB();
+
 			Product p = null;
 			try {
-				p = account.getProduct(id);
+				p = new ProductDAO().getProduct(id);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -96,9 +96,9 @@ public class AdminController extends HttpServlet {
 			p.setCategory(category);
 			p.setFeatured(featured);
 
-			DB account = new DB();
+
 			try {
-				account.updateProduct(p);
+				new ProductDAO().updateProduct(p);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -121,9 +121,9 @@ public class AdminController extends HttpServlet {
 			p.setFeatured(featured);
 			p.setImage("img/" + image);
 
-			DB account = new DB();
+
 			try {
-				account.addProduct(p);
+				new ProductDAO().addProduct(p);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
