@@ -12,7 +12,7 @@ import com.beans.User;
 import com.model.UserDAO;
 
 public class ArticleDAO extends DB{
-
+	
 	ArrayList<Article> titleList = new ArrayList<>();
 	
 	public void addArticle(Article article) throws SQLException {
