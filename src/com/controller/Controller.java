@@ -24,6 +24,7 @@ public class Controller extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String f = "fofofof";
 
 		request.setCharacterEncoding("UTF-8");
 		String page = request.getParameter("page");
