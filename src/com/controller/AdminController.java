@@ -46,11 +46,10 @@ public class AdminController extends HttpServlet {
 
 		if (page.equals("delete")) {
 			String id = request.getParameter("id");
-			
+
 			try {
 				new ProductDAO().deleteProduct(id);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -75,7 +74,6 @@ public class AdminController extends HttpServlet {
 			try {
 				p = new ProductDAO().getProduct(id);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -96,11 +94,9 @@ public class AdminController extends HttpServlet {
 			p.setCategory(category);
 			p.setFeatured(featured);
 
-
 			try {
 				new ProductDAO().updateProduct(p);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			JOptionPane.showMessageDialog(null, "Product details updated successfully", "Info",
@@ -121,11 +117,9 @@ public class AdminController extends HttpServlet {
 			p.setFeatured(featured);
 			p.setImage("img/" + image);
 
-
 			try {
 				new ProductDAO().addProduct(p);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			JOptionPane.showMessageDialog(null, "Product added Successfully", "Info", JOptionPane.INFORMATION_MESSAGE);

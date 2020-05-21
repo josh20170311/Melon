@@ -33,20 +33,20 @@
 		<nav>
 			<ul>
 				<li><input type="text"  name="search"  placeHolder="Search"/></li>
-				<li><a href="Controller?page=index">Home</a></li>
-				<li><a href="Controller?page=articles">Articles</a></li>
+				<li><a href="Home?page=index">Home</a></li>
+				<li><a href="Home?page=articles">Articles</a></li>
 				<c:choose>
 					<c:when test="${session == null}">
-						<li><a href="Controller?page=login">Login</a></li>
-						<li><a href="Controller?page=sign-up">Sign-up</a></li>
+						<li><a href="Home?page=login">Login</a></li>
+						<li><a href="Home?page=sign-up">Sign-up</a></li>
 					</c:when>
 					<c:when test="${session != null}">
-						<li><a href="Controller?page=logout" style="color: #F24638;">Logout</a></li>
+						<li><a href="Home?page=logout" style="color: #F24638;">Logout</a></li>
 						<li><a href="#">My Account(<c:out value="${username }"></c:out>)</a></li>
-						<li><a href=Controller?page=myarticles>My Articles</a></li>
+						<li><a href=Home?page=myarticles>My Articles</a></li>
 					</c:when>
 				</c:choose>
-				<li><a href="Controller?page=showcart">cart(<c:out value="${x}"/>)</a></li>
+				<li><a href="Home?page=showcart">cart(<c:out value="${x}"/>)</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -56,7 +56,7 @@
 	<div class="tiazon-content"><%//style.css  %>
 	 	<div class="container"><%//bootstrap  %>
 	 		<div class="row"><%//bootstrap  %>
-	 					<a class="btn btn-primary" href="Controller?page=addarticle">Add Article</a>
+	 					<a class="btn btn-primary" href="Home?page=addarticle">Add Article</a>
 			</div>
 	 	</div>
  	</div>
@@ -64,7 +64,7 @@
 	
 	<footer>
 		<div class="footer">
-	      <a href="Controller?page=index"> Melon</a>
+	      <a href="Home?page=index"> Melon</a>
 	    </div>
 	</footer>
 	

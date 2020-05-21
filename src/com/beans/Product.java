@@ -105,7 +105,7 @@ public class Product implements Comparable<Product> {
 
 }
 
-class Temp implements Comparator<Product> {
+	class Temp implements Comparator<Product> {
 
 	@Override
 	public int compare(Product o1, Product o2) {

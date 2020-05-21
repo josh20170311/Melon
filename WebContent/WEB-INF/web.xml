@@ -2,17 +2,17 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>myProject</display-name>
   <welcome-file-list>
-    <welcome-file>Controller</welcome-file>
+    <welcome-file>Home</welcome-file>
   </welcome-file-list>
   <servlet>
     <description></description>
     <display-name>Controller</display-name>
     <servlet-name>Controller</servlet-name>
-    <servlet-class>com.controller.Controller</servlet-class>
+    <servlet-class>com.controller.Home</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Controller</servlet-name>
-    <url-pattern>/Controller</url-pattern>
+    <url-pattern>/Home</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -43,5 +43,35 @@
   <servlet-mapping>
     <servlet-name>ManufacturerController</servlet-name>
     <url-pattern>/ManufacturerController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Article</display-name>
+    <servlet-name>Article</servlet-name>
+    <servlet-class>com.controller.ArticleController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Article</servlet-name>
+    <url-pattern>/Articles</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddArticle</display-name>
+    <servlet-name>AddArticle</servlet-name>
+    <servlet-class>com.controller.AddArticle</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddArticle</servlet-name>
+    <url-pattern>/AddArticle</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MyArticles</display-name>
+    <servlet-name>MyArticles</servlet-name>
+    <servlet-class>com.controller.MyArticles</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyArticles</servlet-name>
+    <url-pattern>/MyArticles</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -25,18 +25,18 @@
 		</h1>
 		<nav>
 			<ul>
-				<li><a href="Controller?page=index">Home</a></li>
+				<li><a href="Home?page=index">Home</a></li>
 				<c:choose>
 					<c:when test="${session == null}">
-						<li><a href="Controller?page=login">Login</a></li>
-						<li><a href="Controller?page=sign-up">Sign-up</a></li>
+						<li><a href="Home?page=login">Login</a></li>
+						<li><a href="Home?page=sign-up">Sign-up</a></li>
 					</c:when>
 					<c:when test="${session != null}">
-						<li><a href="Controller?page=logout" style="color: #F24638;">Logout</a></li>
+						<li><a href="Home?page=logout" style="color: #F24638;">Logout</a></li>
 						<li><a href="#">My Account(<c:out value="${username }"></c:out>)</a></li>
 					</c:when>
 				</c:choose>
-				<li><a href="Controller?page=showcart">cart(<c:out value="${x}"/>)</a></li>
+				<li><a href="Home?page=showcart">cart(<c:out value="${x}"/>)</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -67,7 +67,7 @@
 					<h4>Confirmation mail will be sent shortly to <font color="#6bb1f8"><c:out value="${email }"></c:out></font>.</h4>
 					
 					<br><br>
-					<a href="Controller?page=index"><input type="button" value="Continue Shopping" class="btn btn-warning" style="width:100%;padding:8px;font-size:16px;"></a>
+					<a href="Home"><input type="button" value="Continue Shopping" class="btn btn-warning" style="width:100%;padding:8px;font-size:16px;"></a>
 				</div>
 			
 		</c:when>
@@ -76,7 +76,7 @@
 
 	<footer style="position: fixed;bottom: 0;left: 0;width: 100%;">
 		<div class="footer"> 
-	      <a href="Controller?page=index"> Melon.com</a>
+	      <a href="Home?page=index"> Melon.com</a>
 	    </div>
 	</footer>
 </body>

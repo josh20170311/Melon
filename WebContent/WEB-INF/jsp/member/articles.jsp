@@ -30,20 +30,20 @@
 		<nav>
 			<ul>
 				<li><input type="text"  name="search"  placeHolder="Search"/></li>
-				<li><a href="Controller?page=index">Home</a></li>
-				<li><a href="Controller?page=articles">Articles</a></li>
+				<li><a href="Home?page=index">Home</a></li>
+				<li><a href="Home?page=articles">Articles</a></li>
 				<c:choose>
 					<c:when test="${session == null}">
-						<li><a href="Controller?page=login">Login</a></li>
-						<li><a href="Controller?page=sign-up">Sign-up</a></li>
+						<li><a href="Home?page=login">Login</a></li>
+						<li><a href="Home?page=sign-up">Sign-up</a></li>
 					</c:when>
 					<c:when test="${session != null}">
-						<li><a href="Controller?page=logout" style="color: #F24638;">Logout</a></li>
+						<li><a href="Home?page=logout" style="color: #F24638;">Logout</a></li>
 						<li><a href="#">My Account(<c:out value="${username }"></c:out>)</a></li>
-						<li><a href=Controller?page=myarticles>My Articles</a></li>
+						<li><a href=Home?page=myarticles>My Articles</a></li>
 					</c:when>
 				</c:choose>
-				<li><a href="Controller?page=showcart">cart(<c:out value="${x}"/>)</a></li>
+				<li><a href="Home?page=showcart">cart(<c:out value="${x}"/>)</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -54,15 +54,15 @@
 		
  		<div class="row"><%//bootstrap  %>
  		
- 				<%--左側選單_開始 --%>
+ 				<%--左側文章清單_開始 --%>
  				<div class="col-md-4"><%//bootstrap  %>
  						<div class="list-group">
 								<c:forEach items="${titleList}" var="title">
-									<a href="Controller?page=articles&articleid=${title.getId()}" class="btn btn-primary" style="white-space: pre-wrap;word-wrap: break-word;"><c:out value="${title.getTitle()}"></c:out></a><br>
+									<a href="Articles?id=${title.getId()}" class="btn btn-primary" style="white-space: pre-wrap;word-wrap: break-word;"><c:out value="${title.getTitle()}"></c:out></a><br>
 								</c:forEach>
 						</div> 
  				</div>
-				<%--左側選單_結束 --%>
+				<%--左側文章清單_結束 --%>
 				
 				<%--右側欄_開始 --%>
  				<div class="col-md-8">
@@ -88,7 +88,7 @@
 	
 	<footer>
 		<div class="footer">
-	      <a href="Controller?page=index"> Melon</a>
+	      <a href=""> Melon</a>
 	    </div>
 	</footer>
 

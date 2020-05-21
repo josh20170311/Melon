@@ -26,18 +26,18 @@
 		</h1>
 		<nav>
 			<ul>
-				<li><a href="Controller?page=index">Home</a></li>
+				<li><a href="Home?page=index">Home</a></li>
 				<c:choose>
 					<c:when test="${session == null}">
-						<li><a href="Controller?page=login">Login</a></li>
-						<li><a href="Controller?page=sign-up">Sign-up</a></li>
+						<li><a href="Home?page=login">Login</a></li>
+						<li><a href="Home?page=sign-up">Sign-up</a></li>
 					</c:when>
 					<c:when test="${session != null}">
-						<li><a href="Controller?page=logout" style="color: #F24638;">Logout</a></li>
+						<li><a href="Home?page=logout" style="color: #F24638;">Logout</a></li>
 						<li><a href="#">My Account</a></li>
 					</c:when>
 				</c:choose>
-				<li><a href="Controller?page=showcart">cart(<c:out value="${x}"/>)</a></li>
+				<li><a href="Home?page=showcart">cart(<c:out value="${x}"/>)</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -46,7 +46,7 @@
 	 	<h2>Signup with Melon</h2>
 	 </div>
 
-	 <form method="post" action="Controller">
+	 <form method="post" action="Home">
 	 
 	 <input type="hidden" name="page" value="sign-up-form">
 	 
@@ -84,13 +84,13 @@
 	 		<button type="submit" name="register" class="signup-btn">Register</button>
 	 	</div>
 	 	<p>
-	 		Already have an account? <a href="Controller?page=login" style="color:#F24638;">Login!</a>
+	 		Already have an account? <a href="Home?page=login" style="color:#F24638;">Login!</a>
 	 	</p>
 	 </form>
 	<br><br><br>
 	<footer>
 		<div class="footer">
-	      <a href="Controller?page=index"> Melon</a>
+	      <a href="Home?page=index"> Melon</a>
 	    </div>
 	</footer>
 

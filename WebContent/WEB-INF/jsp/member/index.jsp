@@ -31,20 +31,20 @@
 		<nav>
 			<ul>
 				<li><input type="text"  name="search"  placeHolder="Search"/></li>
-				<li><a href="Controller?page=index">Home</a></li>
-				<li><a href="Controller?page=articles">Articles</a></li>
+				<li><a href="Home"			>Home</a></li>
+				<li><a href="Articles"		>Articles</a></li>
 				<c:choose>
 					<c:when test="${session == null}">
-						<li><a href="Controller?page=login">Login</a></li>
-						<li><a href="Controller?page=sign-up">Sign-up</a></li>
+						<li><a href="Home?page=login"	>Login</a></li>
+						<li><a href="Home?page=sign-up"	>Sign-up</a></li>
 					</c:when>
 					<c:when test="${session != null}">
-						<li><a href="Controller?page=logout" style="color: #F24638;">Logout</a></li>
-						<li><a href="#">My Account(<c:out value="${username }"></c:out>)</a></li>
-						<li><a href=Controller?page=myarticles>My Articles</a></li>
+						<li><a href="Home?page=logout" 	>Logout</a></li>
+						<li><a href="#"					>My Account(<c:out value="${username }"></c:out>)</a></li>
+						<li><a href=MyArticles>My Articles</a></li>
 					</c:when>
 				</c:choose>
-				<li><a href="Controller?page=showcart">cart(<c:out value="${x}"/>)</a></li>
+				<li><a href="Home?page=showcart">cart(<c:out value="${x}"/>)</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -74,7 +74,7 @@
  					
  					<%-- 排序功能_開始  --%>
 					<h5>Sort by(Price):</h5>
-					<form action="Controller" method="get" 
+					<form action="Home" method="get" 
 										style="border: none;margin:0px;padding: 0px;margin-bottom: 20px;">
 							<input type="hidden" name="page" value="price-sort">
 							<input type="hidden" name="action" value="index">
@@ -94,7 +94,7 @@
 		 						<p style="text-align: center;"> $  <c:out value="${ product.getPrice() }"></c:out></p>
 		 						
 		 						<div class="text-center">  
-		 							<a class="btn btn-primary" href="Controller?page=addtocart&action=index&id=<c:out value="${product.getId()}"/>">Add to Cart</a> 
+		 							<a class="btn btn-primary" href="Home?page=addtocart&action=index&id=<c:out value="${product.getId()}"/>">Add to Cart</a> 
 		 						</div><br>
 		 					</div>
  					</c:forEach>
@@ -108,7 +108,7 @@
 	
 	<footer>
 		<div class="footer">
-	      <a href="Controller?page=index"> Melon</a>
+	      <a href="Home"> Melon</a>
 	    </div>
 	</footer>
 	

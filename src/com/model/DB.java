@@ -21,10 +21,8 @@ public class DB {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
 
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

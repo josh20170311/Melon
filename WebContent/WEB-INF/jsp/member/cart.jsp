@@ -22,18 +22,18 @@
 		</h1>
 		<nav>
 			<ul>
-				<li><a href="Controller?page=index">Home</a></li>
+				<li><a href="Home?page=index">Home</a></li>
 				<c:choose>
 					<c:when test="${session == null}">
-						<li><a href="Controller?page=login">Login</a></li>
-						<li><a href="Controller?page=sign-up">Sign-up</a></li>
+						<li><a href="Home?page=login">Login</a></li>
+						<li><a href="Home?page=sign-up">Sign-up</a></li>
 					</c:when>
 					<c:when test="${session != null}">
-						<li><a href="Controller?page=logout" style="color: #F24638;">Logout</a></li>
+						<li><a href="Home?page=logout" style="color: #F24638;">Logout</a></li>
 						<li><a href="#">My Account(<c:out value="${username }"></c:out>)</a></li>
 					</c:when>
 				</c:choose>
-				<li><a href="Controller?page=showcart">cart(<c:out value="${x}"/>)</a></li>
+				<li><a href="Home?page=showcart">cart(<c:out value="${x}"/>)</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -73,7 +73,7 @@
 					<td style="width: 100px;"><img src="${Product.getImage()}" height="100" width="150" >  (<c:out value="${Product.getName()}"/>)</td>
 					<td style="width: 50px;"><c:out value="${Product.getPrice()}"/></td>
 					<td style="width: 100px;"><c:out value="${Product.getCategory()}"/></td>
-					<td style="width: 100px;"><a href="Controller?page=remove&id=<c:out value="${Product.getId()}"/>"><span class="btn btn-danger">X</span></a></td>
+					<td style="width: 100px;"><a href="Home?page=remove&id=<c:out value="${Product.getId()}"/>"><span class="btn btn-danger">X</span></a></td>
 				</tr>
 			</table>
 				</c:if>
@@ -82,15 +82,15 @@
 	
 	<h4 style="margin-top: 40px;margin-bottom: 40px;">Order Total: &#x20b9; (<c:out value="${ total}"></c:out>)</h4>
 	
-	<a href="Controller?page=success"><input type="submit" value="Proceed to Checkout" class="btn btn-success" style="width:100%;padding:8px;font-size:16px;"></a><br>
-	<a href="Controller?page=index"><input type="button" value="Continue Shopping" class="btn btn-warning" style="width:100%;padding:8px;font-size:16px;"></a>
+	<a href="Home?page=success"><input type="submit" value="Proceed to Checkout" class="btn btn-success" style="width:100%;padding:8px;font-size:16px;"></a><br>
+	<a href="Home?page=index"><input type="button" value="Continue Shopping" class="btn btn-warning" style="width:100%;padding:8px;font-size:16px;"></a>
 	
 	
 	</div>
 
 	<footer style="margin-top: 40px;">
 		<div class="footer">
-	      <a href="Controller?page=index"> Melon</a>
+	      <a href="Home"> Melon</a>
 	    </div>
 	</footer>
 
