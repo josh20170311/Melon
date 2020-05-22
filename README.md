@@ -8,7 +8,7 @@ DB : MySQL 8.0<br>
 執行MySQL Workbench<br>
 登入DB Server<br>
 點擊選單列 File/Run SQL script<br>
-選擇Dump######.sql <br>
+選擇Dump########.sql <br>
 Run<br>
 
 
