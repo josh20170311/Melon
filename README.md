@@ -4,12 +4,12 @@ IDE : eclipse IDE for enterprise java develepers<br>
 runtime server :Tomcat 9.0<br>
 DB : MySQL 8.0<br>
 
-匯入資料:
-執行MySQL Workbench
-登入DB Server
-點擊選單列 File/Run SQL script
-選擇Dump######.sql 
-Run
+匯入資料:<br>
+執行MySQL Workbench<br>
+登入DB Server<br>
+點擊選單列 File/Run SQL script<br>
+選擇Dump######.sql <br>
+Run<br>
 
 
 第一次執行專案步驟 :<br>
