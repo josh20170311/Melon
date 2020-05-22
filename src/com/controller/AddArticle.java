@@ -33,7 +33,7 @@ public class AddArticle extends HttpServlet {
 			new ArticleDAO().addArticle(
 					new Article(title, content, new Date(), (int) (request.getSession().getAttribute("userId")),
 							Integer.parseInt(request.getParameter("productId"))));
-			request.getRequestDispatcher("WEB-INF/jsp/member/articles.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/jsp/member/myarticles.jsp").forward(request, response);
 
 		} catch (Exception e) {
 			e.printStackTrace();

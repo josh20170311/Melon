@@ -198,7 +198,7 @@ public class Home extends HttpServlet {
 			session.setAttribute("name", user.fetchname(userList, username));
 			session.setAttribute("userId", user.fetchid(userList, username));
 			session.setAttribute("username", username);
-			request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
+			request.getRequestDispatcher("Home?page=index").forward(request, response);
 		} else {//
 			request.setAttribute("msg", "Invalid Crediantials");
 			request.setAttribute("username", username);
