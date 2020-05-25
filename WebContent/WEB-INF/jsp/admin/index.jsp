@@ -25,7 +25,7 @@
 		</nav>
 	</header>
 	
-	 <sql:setDataSource user="root" password="1234" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/myproject?serverTimezone=UTC" var="ds" />
+	 <sql:setDataSource user="root" password="1234" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/myproject?serverTimezone=UTC" var="ds" />
 	 
 	  <sql:query var="result" dataSource="${ds }">
  
@@ -64,9 +64,7 @@
 		 </c:forEach>
 		 </div>
 	 <footer>
-		<div class="footer"> &copy; 2018 Copyright:
-	      Tiazon.com
-	    </div>
+	 	<div class="footer">Melon</div>
 	</footer>
 	
 </body>

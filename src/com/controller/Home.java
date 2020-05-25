@@ -45,6 +45,9 @@ public class Home extends HttpServlet {
 
 		
 		String page = request.getParameter("page");
+		System.out.println();
+		System.out.println("in Home");
+		System.out.println("page : "+page);
 		if(page == null || page.equals("index")){
 			request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
 			return;
@@ -76,12 +79,10 @@ public class Home extends HttpServlet {
 				boolean check = p.check(cartlist, id);
 	
 				if (check)
-					JOptionPane.showMessageDialog(null, "Product is already added to Cart", "Info",
-							JOptionPane.INFORMATION_MESSAGE);
+					request.setAttribute("message", "Product is 'already' added to Cart");
 				else {
 					cartlist.add(id);
-					JOptionPane.showMessageDialog(null, "Product successfully added to Cart", "Info",
-							JOptionPane.INFORMATION_MESSAGE);
+					request.setAttribute("message", "Product successfully added to Cart");
 				}
 	
 				if (action.equals("index"))
@@ -96,6 +97,21 @@ public class Home extends HttpServlet {
 					productList = new Product().hightolow(productList);
 
 				session.setAttribute("list", productList);
+				break;
+			case "remove":
+				String itemId = request.getParameter("id");
+				
+				cartlist = new Product().remove(cartlist, itemId);
+
+				session = request.getSession();
+				session.setAttribute("cartlist", cartlist);
+				request.getRequestDispatcher("WEB-INF/jsp/member/cart.jsp").forward(request, response);
+				break;
+			case "success":
+				session = request.getSession();
+				cartlist.clear();
+				session.setAttribute("cartlist", cartlist );
+				request.getRequestDispatcher("WEB-INF/jsp/member/success.jsp").forward(request, response);
 				break;
 		}
 
@@ -114,18 +130,8 @@ public class Home extends HttpServlet {
 			case "login-form":
 				doLoginForm(request, response);
 				break;
-			case "success":
-				request.getRequestDispatcher("WEB-INF/jsp/member/success.jsp").forward(request, response);
-				break;
-			case "remove":
-				String id = request.getParameter("id");
-				
-				cartlist = new Product().remove(cartlist, id);
-
-				session = request.getSession();
-				session.setAttribute("cartlist", cartlist);
-				request.getRequestDispatcher("WEB-INF/jsp/member/cart.jsp").forward(request, response);
-				break;
+			
+			
 		
 		}
 	}
@@ -172,6 +178,8 @@ public class Home extends HttpServlet {
 
 	private void doLoginForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println();
+		System.out.println("in doLoginForm");
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -198,7 +206,7 @@ public class Home extends HttpServlet {
 			session.setAttribute("name", user.fetchname(userList, username));
 			session.setAttribute("userId", user.fetchid(userList, username));
 			session.setAttribute("username", username);
-			request.getRequestDispatcher("Home?page=index").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
 		} else {//
 			request.setAttribute("msg", "Invalid Crediantials");
 			request.setAttribute("username", username);

@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Home</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
 <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -16,27 +16,9 @@
 		<c:set var="x" value="${x+1 }"></c:set>
 	</c:forEach>
 
-	<header>
-		<h1>
-			Melon
-		</h1>
-		<nav>
-			<ul>
-				<li><a href="Home?page=index">Home</a></li>
-				<c:choose>
-					<c:when test="${session == null}">
-						<li><a href="Home?page=login">Login</a></li>
-						<li><a href="Home?page=sign-up">Sign-up</a></li>
-					</c:when>
-					<c:when test="${session != null}">
-						<li><a href="Home?page=logout" style="color: #F24638;">Logout</a></li>
-						<li><a href="#">My Account(<c:out value="${username }"></c:out>)</a></li>
-					</c:when>
-				</c:choose>
-				<li><a href="Home?page=showcart">cart(<c:out value="${x}"/>)</a></li>
-			</ul>
-		</nav>
-	</header>
+	<%--導覽bar_開始 --%>
+	<%@ include file="header.jsp"%>
+	<%--導覽bar_結束 --%>
 	
 	<div class="container">
 	
@@ -80,7 +62,7 @@
 			</c:forEach>
 		</c:forEach>
 	
-	<h4 style="margin-top: 40px;margin-bottom: 40px;">Order Total: &#x20b9; (<c:out value="${ total}"></c:out>)</h4>
+	<h4 style="margin-top: 40px;margin-bottom: 40px;">Order Total: $ (<c:out value="${ total}"></c:out>)</h4>
 	
 	<a href="Home?page=success"><input type="submit" value="Proceed to Checkout" class="btn btn-success" style="width:100%;padding:8px;font-size:16px;"></a><br>
 	<a href="Home?page=index"><input type="button" value="Continue Shopping" class="btn btn-warning" style="width:100%;padding:8px;font-size:16px;"></a>
@@ -88,11 +70,7 @@
 	
 	</div>
 
-	<footer style="margin-top: 40px;">
-		<div class="footer">
-	      <a href="Home"> Melon</a>
-	    </div>
-	</footer>
+	<%@ include file="footer.jsp" %>
 
 </body>
 </html>

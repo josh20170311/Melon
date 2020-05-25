@@ -6,10 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.beans.Article;
-import com.beans.Product;
-import com.beans.User;
-import com.model.UserDAO;
+import com.beans.*;
 
 public class ArticleDAO extends DB{
 	
@@ -17,8 +14,7 @@ public class ArticleDAO extends DB{
 	
 	public void addArticle(Article article) throws SQLException {
 		dbConnect();
-		String sql = "Insert into article(" + "articleTitle," + "articleContent," + "articleUploadTime,"
-				+ "articleAuthorId," + "articleProductId" + ") values(?,?,?,?,?)";
+		String sql = "Insert into article(articleTitle, articleContent, articleUploadTime, articleAuthorId, articleProductId ) values(?,?,?,?,?)";
 		PreparedStatement st = con.prepareStatement(sql);
 
 		st.setString(1, article.getTitle());
@@ -40,14 +36,20 @@ public class ArticleDAO extends DB{
 	 * @return ArrayList<Article>
 	 * @throws SQLException
 	 */
-	public ArrayList<Article> fetchArticleInfos() throws SQLException {
-		dbConnect();
-
-		String sql = "Select articleId, articleTitle, articleUploadTime, articleProductId, articleAuthorId from article where audited=1;";
-		PreparedStatement st = con.prepareStatement(sql);
-		ResultSet rs = st.executeQuery();
+	public ArrayList<Article> getArticleInfos(Object userId, Object audited) throws SQLException {
 		System.out.println();
 		System.out.println("in fetchArticleInfos");
+		
+		dbConnect();
+		String sql;
+		sql = "Select articleId, articleTitle, articleUploadTime, articleProductId, articleAuthorId, audited from article where audited LIKE ? and articleAuthorId LIKE ?;";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setObject(1, audited);
+		st.setObject(2,userId);
+		
+		//System.out.println(st); //檢查query 字串
+		ResultSet rs = st.executeQuery();
 
 		while (rs.next()) {
 			int id = rs.getInt("articleId");
@@ -55,12 +57,14 @@ public class ArticleDAO extends DB{
 			int productid = rs.getInt("articleProductId");
 			Date t = (Date) rs.getObject("articleUploadTime");
 			String title = rs.getString("articleTitle");
+			Boolean isaudited = rs.getBoolean("audited");
 
 			Article article = new Article();
 			article.setTitle(title);
 			article.setId(id);
 			article.setAuthorId(authorid);
 			article.setProductId(productid);
+			article.setAudited(isaudited);
 
 			article.setUploadTime(t);
 			System.out.println(article);
@@ -72,12 +76,27 @@ public class ArticleDAO extends DB{
 		dbClose();
 		return titleList;
 	}
+	
+	/**
+	 * 搜尋全部核准的文章
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<Article> getAuditedArticleInfos() throws SQLException {
+		return this.getArticleInfos("%", 1);
+	}
 
 	/**
-	 * 
-	 * 使用者點擊文章標題後 顯示文章內容
-	 * 
-	 * 
+	 * 搜尋使用者全部的文章
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<Article> getUserArticleInfos(int userId) throws SQLException {
+		return this.getArticleInfos(userId, "%");
+	}
+	
+	/**
+	 * 搜尋文章內容
 	 * @param id
 	 * @return article
 	 * @throws SQLException
@@ -100,6 +119,7 @@ public class ArticleDAO extends DB{
 			article.setContent(rs.getString("articleContent"));
 			article.setTitle(rs.getString("articleTitle"));
 			article.setUploadTime((Date) rs.getObject("articleUploadTime"));
+			article.setAudited((Boolean)rs.getObject("audited"));
 			System.out.println(article.toInfoString());
 		}
 		dbClose();

@@ -19,7 +19,7 @@ public class DB {
 			Class.forName(driver);
 
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
-
+			System.out.println(con);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

@@ -20,7 +20,7 @@ public class AddArticle extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("AddArticle").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/jsp/member/addArticle.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -33,7 +33,7 @@ public class AddArticle extends HttpServlet {
 			new ArticleDAO().addArticle(
 					new Article(title, content, new Date(), (int) (request.getSession().getAttribute("userId")),
 							Integer.parseInt(request.getParameter("productId"))));
-			request.getRequestDispatcher("WEB-INF/jsp/member/myarticles.jsp").forward(request, response);
+			request.getRequestDispatcher("MyArticles").forward(request, response);
 
 		} catch (Exception e) {
 			e.printStackTrace();

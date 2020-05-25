@@ -11,6 +11,16 @@ public class Article {
 	private String productName;
 	private int productId;
 	private Date uploadTime;
+	private Boolean Audited;
+	
+	
+	public Boolean getAudited() {
+		return Audited;
+	}
+
+	public void setAudited(Boolean audited) {
+		Audited = audited;
+	}
 
 	public Article() {
 		this.id = -1;

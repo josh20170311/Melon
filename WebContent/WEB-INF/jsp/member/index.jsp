@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -15,7 +15,10 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-	
+	<script type="text/javascript">
+	if("${message}" != "")
+			alert("${message}");
+	</script>
 	<%--設定購物車_開始 --%>
 	<c:set var="x" value="0"></c:set>
 	<c:forEach items="${cartlist }" var="i">
@@ -24,30 +27,7 @@
 	<%--設定購物車_結束 --%>
 	
 	<%--導覽bar_開始 --%>
-	<header>
-		<h1>
-			Melon
-		</h1>
-		<nav>
-			<ul>
-				<li><input type="text"  name="search"  placeHolder="Search"/></li>
-				<li><a href="Home"			>Home</a></li>
-				<li><a href="Articles"		>Articles</a></li>
-				<c:choose>
-					<c:when test="${session == null}">
-						<li><a href="Home?page=login"	>Login</a></li>
-						<li><a href="Home?page=sign-up"	>Sign-up</a></li>
-					</c:when>
-					<c:when test="${session != null}">
-						<li><a href="Home?page=logout" 	>Logout</a></li>
-						<li><a href="#"					>My Account(<c:out value="${username }"></c:out>)</a></li>
-						<li><a href=MyArticles>My Articles</a></li>
-					</c:when>
-				</c:choose>
-				<li><a href="Home?page=showcart">cart(<c:out value="${x}"/>)</a></li>
-			</ul>
-		</nav>
-	</header>
+	<%@ include file="header.jsp"%>
 	<%--導覽bar_結束 --%>
 	
 	<%--主要內容_開始 --%>
@@ -106,11 +86,7 @@
  	</div>
 	<%--主要內容_結束 --%>
 	
-	<footer>
-		<div class="footer">
-	      <a href="Home"> Melon</a>
-	    </div>
-	</footer>
+	<%@ include file="footer.jsp" %>
 	
 </body>
 </html>

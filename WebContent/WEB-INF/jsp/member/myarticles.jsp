@@ -26,47 +26,50 @@
 	<%--設定購物車_結束 --%>
 	
 	<%--導覽bar_開始 --%>
-	<header>
-		<h1>
-			Melon
-		</h1>
-		<nav>
-			<ul>
-				<li><input type="text"  name="search"  placeHolder="Search"/></li>
-				<li><a href="Home?page=index">Home</a></li>
-				<li><a href="Home?page=articles">Articles</a></li>
-				<c:choose>
-					<c:when test="${session == null}">
-						<li><a href="Home?page=login">Login</a></li>
-						<li><a href="Home?page=sign-up">Sign-up</a></li>
-					</c:when>
-					<c:when test="${session != null}">
-						<li><a href="Home?page=logout" style="color: #F24638;">Logout</a></li>
-						<li><a href="#">My Account(<c:out value="${username }"></c:out>)</a></li>
-						<li><a href=Home?page=myarticles>My Articles</a></li>
-					</c:when>
-				</c:choose>
-				<li><a href="Home?page=showcart">cart(<c:out value="${x}"/>)</a></li>
-			</ul>
-		</nav>
-	</header>
+	<%@ include file="header.jsp"%>
 	<%--導覽bar_結束 --%>
 	
 	<%--主要內容_開始 --%>
+	
+	 					<a class="btn btn-primary" href="AddArticle">Add Article</a>
 	<div class="tiazon-content"><%//style.css  %>
 	 	<div class="container"><%//bootstrap  %>
 	 		<div class="row"><%//bootstrap  %>
-	 					<a class="btn btn-primary" href="Home?page=addarticle">Add Article</a>
+	 					<%--左側文章清單_開始 --%>
+ 				<div class="col-md-4"><%//bootstrap  %>
+ 						<div class="list-group">
+								<c:forEach items="${myArticleInfos}" var="title">
+									<a href="MyArticles?id=${title.getId()}" class="btn btn-primary" style="white-space: pre-wrap;word-wrap: break-word;"><c:out value="${title.getTitle()}"></c:out></a><br>
+								</c:forEach>
+						</div> 
+ 				</div>
+				<%--左側文章清單_結束 --%>
+				
+				<%--右側欄_開始 --%>
+ 				<div class="col-md-8">
+ 					
+ 					
+					
+						<pre style="white-space: pre-wrap;word-wrap: break-word;">
+<c:out value="Title : ${article.getTitle() }"></c:out>
+<c:out value="Author : ${article.getAuthorName() }"></c:out>
+<c:out value="Product : ${article.getProductName() }"></c:out>
+<c:out value="Time : ${article.getUploadTime() }"></c:out>
+<c:out value="Audited : ${article.getAudited() }"></c:out>
+						</pre>
+						<pre style="white-space: pre-wrap;word-wrap: break-word;">
+<c:out value="${article.getContent()}"></c:out>
+						</pre>
+					
+
+ 				</div>
+ 				<%--右側欄_結束 --%>
 			</div>
 	 	</div>
  	</div>
 	<%--主要內容_結束 --%>
 	
-	<footer>
-		<div class="footer">
-	      <a href="Home?page=index"> Melon</a>
-	    </div>
-	</footer>
+	<%@ include file="footer.jsp" %>
 	
 </body>
 </html>

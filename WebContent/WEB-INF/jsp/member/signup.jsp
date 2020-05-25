@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Sign up page</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link 
@@ -19,28 +19,10 @@
 	<c:forEach items="${cartlist }" var="i">
 		<c:set var="x" value="${x+1 }"></c:set>
 	</c:forEach>
-
-<header>
-		<h1>
-			Melon
-		</h1>
-		<nav>
-			<ul>
-				<li><a href="Home?page=index">Home</a></li>
-				<c:choose>
-					<c:when test="${session == null}">
-						<li><a href="Home?page=login">Login</a></li>
-						<li><a href="Home?page=sign-up">Sign-up</a></li>
-					</c:when>
-					<c:when test="${session != null}">
-						<li><a href="Home?page=logout" style="color: #F24638;">Logout</a></li>
-						<li><a href="#">My Account</a></li>
-					</c:when>
-				</c:choose>
-				<li><a href="Home?page=showcart">cart(<c:out value="${x}"/>)</a></li>
-			</ul>
-		</nav>
-	</header>
+	
+	<%--導覽bar_開始 --%>
+	<%@ include file="header.jsp"%>
+	<%--導覽bar_結束 --%>
 	
 	<div class="signup-header">
 	 	<h2>Signup with Melon</h2>
@@ -88,11 +70,7 @@
 	 	</p>
 	 </form>
 	<br><br><br>
-	<footer>
-		<div class="footer">
-	      <a href="Home?page=index"> Melon</a>
-	    </div>
-	</footer>
-
+	
+<%@ include file="footer.jsp" %>
 </body>
 </html>
