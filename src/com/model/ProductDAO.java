@@ -36,7 +36,6 @@ public class ProductDAO extends DB{
 			p.setName(rst.getString("name"));
 			p.setPrice(rst.getString("price"));
 			p.setCategory(rst.getString("category"));
-			p.setFeatured(rst.getString("featured"));
 			p.setImage(rst.getString("image"));
 		}
 		dbClose();
@@ -45,27 +44,25 @@ public class ProductDAO extends DB{
 
 	public void updateProduct(Product p) throws SQLException {
 		dbConnect();
-		String sql = "update product set name=?,price=?,category=?,featured=? where id=?";
+		String sql = "update product set name=?,price=?,category=? where id=?";
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setString(1, p.getName());
 		st.setString(2, p.getPrice());
 		st.setString(3, p.getCategory());
-		st.setString(4, p.getFeatured());
-		st.setInt(5, p.getId());
+		st.setInt(4, p.getId());
 		st.executeUpdate();
 		dbClose();
 	}
 
 	public void addProduct(Product p) throws SQLException {
 		dbConnect();
-		String sql = "Insert into product(name,price,category,featured,image) values(?,?,?,?,?)";
+		String sql = "Insert into product(name,price,category,image) values(?,?,?,?,?)";
 		PreparedStatement st = con.prepareStatement(sql);
 
 		st.setString(1, p.getName());
 		st.setString(2, p.getPrice());
 		st.setString(3, p.getCategory());
-		st.setString(4, p.getFeatured());
-		st.setString(5, p.getImage());
+		st.setString(4, p.getImage());
 
 		st.executeUpdate();
 		dbClose();
@@ -80,12 +77,10 @@ public class ProductDAO extends DB{
 			String name = rs.getString("name");
 			String category = rs.getString("category");
 			String price = rs.getString("price");
-			String featured = rs.getString("featured");
 			String image = rs.getString("image");
 
 			Product p = new Product();
 			p.setCategory(category);
-			p.setFeatured(featured);
 			p.setId(id);
 			p.setImage(image);
 			p.setName(name);
