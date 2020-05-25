@@ -47,10 +47,7 @@
 	 		<input type="text" name="category" value="<c:out value="${p.getCategory() }"></c:out>" required>
 	 	</div>
 	 	
-	 	<div class="signup-group">
-	 		<label>Featured</label>
-	 		<input type="text" name="featured" value="<c:out value="${p.getFeatured() }"></c:out>" required>
-	 	</div>
+	 	
 	 	<div class="signup-group">
 	 		<label>Image</label>
 	 		<img style="height: 160px;width: 160px;" src="<c:out value="${p.getImage() }"></c:out>">

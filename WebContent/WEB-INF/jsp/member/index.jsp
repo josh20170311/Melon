@@ -13,11 +13,11 @@
 	crossorigin="anonymous"> 
 	
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="js/utils.js"></script>
 </head>
 <body>
-	<script type="text/javascript">
-	if("${message}" != "")
-			alert("${message}");
+	<script>
+		alertMessage("${message}");
 	</script>
 	<%--設定購物車_開始 --%>
 	<c:set var="x" value="0"></c:set>

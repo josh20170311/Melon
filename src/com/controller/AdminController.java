@@ -20,7 +20,7 @@ public class AdminController extends HttpServlet {
 		String page = request.getParameter("page");
 		if (page == null) {
 			request.getRequestDispatcher("/WEB-INF/jsp/admin/login.jsp").forward(request, response);
-			;
+			
 		} else {
 			doPost(request, response);
 		}
@@ -29,6 +29,7 @@ public class AdminController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String page = request.getParameter("page");
+		
 		if (page.equals("admin-login-form")) {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
@@ -53,8 +54,8 @@ public class AdminController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			JOptionPane.showMessageDialog(null, "Product deleted successfully", "Info",
-					JOptionPane.INFORMATION_MESSAGE);
+			//JOptionPane.showMessageDialog(null, "Product deleted successfully", "Info",	JOptionPane.INFORMATION_MESSAGE);
+			request.setAttribute("message", "Product deleted successfully");
 			request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
 
 		}
@@ -86,35 +87,31 @@ public class AdminController extends HttpServlet {
 			String name = request.getParameter("name");
 			String price = request.getParameter("price");
 			String category = request.getParameter("category");
-			String featured = request.getParameter("featured");
 			Product p = new Product();
 			p.setId(Integer.parseInt(id));
 			p.setName(name);
 			p.setPrice(price);
 			p.setCategory(category);
-			p.setFeatured(featured);
 
 			try {
 				new ProductDAO().updateProduct(p);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			JOptionPane.showMessageDialog(null, "Product details updated successfully", "Info",
-					JOptionPane.INFORMATION_MESSAGE);
+			//JOptionPane.showMessageDialog(null, "Product details updated successfully", "Info",	JOptionPane.INFORMATION_MESSAGE);
+			request.setAttribute("message", "Product details updated successfully");
 			request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
 		}
 
-		if (page.equals("add_product")) {
+		if (page.equals("addingProduct")) {
 			String name = request.getParameter("name");
 			String price = request.getParameter("price");
 			String category = request.getParameter("category");
-			String featured = request.getParameter("featured");
 			String image = request.getParameter("image");
 			Product p = new Product();
 			p.setName(name);
 			p.setPrice(price);
 			p.setCategory(category);
-			p.setFeatured(featured);
 			p.setImage("img/" + image);
 
 			try {
@@ -122,7 +119,8 @@ public class AdminController extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			JOptionPane.showMessageDialog(null, "Product added Successfully", "Info", JOptionPane.INFORMATION_MESSAGE);
+			//JOptionPane.showMessageDialog(null, "Product added Successfully", "Info", JOptionPane.INFORMATION_MESSAGE);
+			request.setAttribute("message", "Product added Successfully");
 			request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
 		}
 	}

@@ -96,6 +96,15 @@ public class ArticleDAO extends DB{
 	}
 	
 	/**
+	 * 搜尋資料庫全部的文章
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<Article> getAllArticleInfos() throws SQLException {
+		return this.getArticleInfos("%", "%");
+	}
+	
+	/**
 	 * 搜尋文章內容
 	 * @param id
 	 * @return article

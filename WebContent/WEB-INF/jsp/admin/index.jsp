@@ -1,36 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Admin Index</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="js/utils.js"></script>
 </head>
+
 <body>
-	<header>
-		<h1>
-			Welcome admin
-		</h1>
-		<nav>
-			<ul>
-				<li><a href="admin?page=index">Home</a></li>
-				<li><a href="admin?page=addproduct">Add Product</a></li>
-				<li><a href="#">Settings</a></li>
-				<li><a href="#">Pages</a></li>
-			</ul>
-		</nav>
-	</header>
-	
+	<script>
+		alertMessage("${message}");
+	</script>
+	<%@include file="header.jsp" %>
 	 <sql:setDataSource user="root" password="1234" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/myproject?serverTimezone=UTC" var="ds" />
 	 
 	  <sql:query var="result" dataSource="${ds }">
- 
 		 select * from product
-		 
 	   </sql:query>
 	   
 	  
@@ -63,9 +53,6 @@
 			</table>
 		 </c:forEach>
 		 </div>
-	 <footer>
-	 	<div class="footer">Melon</div>
-	</footer>
-	
+	 <%@include file="footer.jsp" %>
 </body>
 </html>
