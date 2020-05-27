@@ -28,11 +28,17 @@ public class AddArticle extends HttpServlet {
 		try {
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
-			System.out.println(title + "\t" + content);
-
-			new ArticleDAO().addArticle(
-					new Article(title, content, new Date(), (int) (request.getSession().getAttribute("userId")),
-							Integer.parseInt(request.getParameter("productId"))));
+			Date d = new Date();
+			String memberId = request.getSession().getAttribute("userId").toString();
+			int productId = Integer.parseInt(request.getParameter("productId"));
+			
+			new ArticleDAO().addArticle(new Article(title,
+													content,
+													new Date(),
+													memberId,
+													productId
+													)
+										);
 			request.getRequestDispatcher("MyArticles").forward(request, response);
 
 		} catch (Exception e) {

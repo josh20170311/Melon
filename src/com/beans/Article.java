@@ -6,7 +6,7 @@ public class Article {
 	private int id;
 	private String title;
 	private String content;
-	private int authorId;
+	private String authorId;
 	private String authorName;
 	private String productName;
 	private int productId;
@@ -24,17 +24,16 @@ public class Article {
 
 	public Article() {
 		this.id = -1;
-		this.authorId = -1;
+		this.authorId = null;
 		this.title = null;
 		this.content = null;
-		this.authorId = -1;
 		this.productId = -1;
 		this.uploadTime = new Date(0);
 		this.authorName = "";
 		this.productName = "";
 	}
 
-	public Article(String title, String content, Date uploadTime, int authorId, int productId) {
+	public Article(String title, String content, Date uploadTime, String authorId, int productId) {
 		this.title = title;
 		this.content = content;
 		this.authorId = authorId;
@@ -109,11 +108,11 @@ public class Article {
 		this.content = content;
 	}
 
-	public int getAuthorId() {
+	public String getAuthorId() {
 		return authorId;
 	}
 
-	public void setAuthorId(int authorId) {
+	public void setAuthorId(String authorId) {
 		this.authorId = authorId;
 	}
 

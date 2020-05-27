@@ -36,8 +36,8 @@
 	 	<font color="#F24638"><c:out value="${msg }"></c:out></font>
 	 
 	 	<div class="signup-group">
-	 		<label>Username</label>
-	 		<input type="text" name="username" placeholder="Your Username" value="<c:out value="${username }" ></c:out>"  required>
+	 		<label>Member ID</label>
+	 		<input type="text" name="id" placeholder="Your Member ID" value="<c:out value="${id }" ></c:out>"  required>
 	 	</div>
 	 	<div class="signup-group">
 	 		<label>Password</label>

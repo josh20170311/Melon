@@ -20,7 +20,7 @@ public class ArticleDAO extends DB{
 		st.setString(1, article.getTitle());
 		st.setString(2, article.getContent());
 		st.setObject(3, article.getUploadTime());
-		st.setInt(4, article.getAuthorId());
+		st.setString(4, article.getAuthorId());
 		st.setInt(5, article.getProductId());
 
 		st.executeUpdate();
@@ -53,7 +53,7 @@ public class ArticleDAO extends DB{
 
 		while (rs.next()) {
 			int id = rs.getInt("articleId");
-			int authorid = rs.getInt("articleAuthorId");
+			String authorid = rs.getString("articleAuthorId");
 			int productid = rs.getInt("articleProductId");
 			Date t = (Date) rs.getObject("articleUploadTime");
 			String title = rs.getString("articleTitle");
@@ -123,7 +123,7 @@ public class ArticleDAO extends DB{
 
 		while (rs.next()) {
 			article.setId(id);
-			article.setAuthorId(rs.getInt("articleAuthorId"));
+			article.setAuthorId(rs.getString("articleAuthorId"));
 			article.setProductId(rs.getInt("articleProductId"));
 			article.setContent(rs.getString("articleContent"));
 			article.setTitle(rs.getString("articleTitle"));
@@ -134,9 +134,9 @@ public class ArticleDAO extends DB{
 		dbClose();
 
 
-		User u = new UserDAO().getUser(article.getAuthorId());
+		Member m = new MemberDAO().getMember(article.getAuthorId());
 		Product p = new ProductDAO().getProduct(article.getProductId() + "");
-		article.setAuthorName(u.getName());
+		article.setAuthorName(m.getName());
 		article.setProductName(p.getName());
 
 		return article;

@@ -35,23 +35,39 @@
 	 	<!-- Validations errors -->
 	 	<font color="#F24638"><c:out value="${msg }"></c:out></font>
 	 	
+	 	<div class="signup-group">
+	 		<label>Member ID</label>
+	 		<input type="text" name="id" placeholder="member id" value="<c:out value="${id}"></c:out>" required>
+	 	</div>
+	 	
 	 	
 	 	<div class="signup-group">
 	 		<label>Name</label>
 	 		<input type="text" name="name" placeholder="Name goes here" value="<c:out value="${name }"></c:out>" required>
 	 	</div>
+	 	
+	 	
 	 	<div class="signup-group">
-	 		<label>Email</label>
-	 		<input type="email" name="email" placeholder="Your email address" value="<c:out value="${email }"></c:out>" required>
+	 		<label>Gender</label>
+	 		<input type="text" name="gender" placeholder="Your Gender (male/female)" value="<c:out value="${gender }"></c:out>" required>
 	 	</div>
-	 	<div class="signup-group">
-	 		<label>Username</label>
-	 		<input type="text" name="username" placeholder="Username" value="<c:out value="${username }"></c:out>" required>
-	 	</div>
+	 	
 	 	
 	 	<div class="signup-group">
 	 		<label>Address</label>
-	 		<input type="text" name="address" placeholder="your address goes here" value="<c:out value="${address }"></c:out>" required>
+	 		<input type="text" name="address" placeholder="Your address goes here" value="<c:out value="${address }"></c:out>" required>
+	 	</div>
+	 	
+	 	
+	 	<div class="signup-group">
+	 		<label>Phone</label>
+	 		<input type="text" name="phone" placeholder="Your phone number goes here" value="<c:out value="${phone }"></c:out>" required>
+	 	</div>
+	 	
+	 	
+	 	<div class="signup-group">
+	 		<label>Email</label>
+	 		<input type="email" name="email" placeholder="Your email address" value="<c:out value="${email }"></c:out>" required>
 	 	</div>
 	 	<div class="signup-group">
 	 		<label>Password</label>

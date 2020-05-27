@@ -8,7 +8,7 @@ public class DB {
 
 	private String dbUsername = "root";
 	private String dbPassword = "1234";
-	private String url = "jdbc:mysql://localhost:3306/myproject?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8";
+	private String url = "jdbc:mysql://localhost:3306/melon?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8";
 	private String driver = "com.mysql.cj.jdbc.Driver";
 	protected Connection con;
 

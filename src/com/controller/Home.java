@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 
 import com.beans.*;
 import com.model.*;
@@ -23,7 +22,7 @@ public class Home extends HttpServlet {
 
 	ArrayList<Product> productList = new ArrayList<>();
 	ArrayList<String> cartlist = new ArrayList<>();
-	ArrayList<User> userList = new ArrayList<>();
+	ArrayList<Member> memberList = new ArrayList<>();
 
 	HttpSession session;
 
@@ -138,39 +137,46 @@ public class Home extends HttpServlet {
 
 	private void doSignUpForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 
-		String name = request.getParameter("name");
-		String email = request.getParameter("email");
-		String username = request.getParameter("username");
-		String address = request.getParameter("address");
-		String password_1 = request.getParameter("password_1");
-		String password_2 = request.getParameter("password_2");
+		String id 			= request.getParameter("id");
+		String name 		= request.getParameter("name");
+		String gender 		= request.getParameter("gender");
+		String address 		= request.getParameter("address");
+		String phone 		= request.getParameter("phone");
+		String email 		= request.getParameter("email");
+		String password_1 	= request.getParameter("password_1");
+		String password_2 	= request.getParameter("password_2");
 
 		if (password_1.equals(password_2)) {
 
-			User user = new User();
-			user.setAddress(address);
-			user.setEmail(email);
-			user.setName(name);
-			user.setUsername(username);
-			user.setPassword(password_1);
-
+			Member member = new Member();
+			member.setId(id);
+			member.setName(name);
+			member.setGender(gender);
+			member.setAddress(address);
+			member.setPhone(phone);
+			member.setEmail(email);
+			member.setPassword(password_1);
+			
 			try {
-				new UserDAO().addUser(user);
+				new MemberDAO().addMember(member);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 
-			request.setAttribute("username", username);
+			request.setAttribute("id", id);//要傳給login 預先填入帳號
 			request.setAttribute("msg", "Account created successfully, Please Login!");
 			request.getRequestDispatcher("WEB-INF/jsp/member/login.jsp").forward(request, response);
 
 		} else {
 			request.setAttribute("msg", "The two passwords do not match");
+			request.setAttribute("id", id);
 			request.setAttribute("name", name);
+			request.setAttribute("gender", gender);
 			request.setAttribute("address", address);
-			request.setAttribute("email", email);
-			request.setAttribute("username", username);
+			request.setAttribute("phone", phone);
+			request.setAttribute("email", email);//給signup預先填入
 			request.getRequestDispatcher("WEB-INF/jsp/member/signup.jsp").forward(request, response);
 		}
 
@@ -181,35 +187,35 @@ public class Home extends HttpServlet {
 		System.out.println();
 		System.out.println("in doLoginForm");
 
-		String username = request.getParameter("username");
+		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 
-		UserDAO userDAO = new UserDAO();
-		User user = new User();
+		MemberDAO memberDAO = new MemberDAO();
+
 		boolean status = false;
 		try {
-			status = userDAO.checkUser(username, password);
+			status = memberDAO.checkMember(id, password);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		if (status) {//
 			session = request.getSession();
 			session.setAttribute("session", session);
-
+			
+			Member m = new Member();
 			try {
-				userList = userDAO.fetchUser();
+				m = memberDAO.getMember(id);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			session.setAttribute("address", user.fetchadd(userList, username));
-			session.setAttribute("email", user.fetchemail(userList, username));
-			session.setAttribute("name", user.fetchname(userList, username));
-			session.setAttribute("userId", user.fetchid(userList, username));
-			session.setAttribute("username", username);
+			session.setAttribute("address", m.getAddress());
+			session.setAttribute("email", 	m.getEmail());
+			session.setAttribute("name", 	m.getName());
+			session.setAttribute("id", 		id);
 			request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
 		} else {//
 			request.setAttribute("msg", "Invalid Crediantials");
-			request.setAttribute("username", username);
+			request.setAttribute("id", id);
 			request.getRequestDispatcher("WEB-INF/jsp/member/login.jsp").forward(request, response);
 		}
 

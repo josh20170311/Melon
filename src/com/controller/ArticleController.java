@@ -19,7 +19,7 @@ public class ArticleController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException {/*
 		int id = -1;//articleId;
 		
 		try {
@@ -33,6 +33,7 @@ public class ArticleController extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.getRequestDispatcher("WEB-INF/jsp/member/articles.jsp").forward(request, response);
+		*/
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
