@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
+import java.util.Date;
 
 import com.beans.Product;
 import com.model.*;
@@ -28,6 +28,7 @@ public class AdminController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String page = request.getParameter("page");
 		
 		if (page.equals("admin-login-form")) {
@@ -83,17 +84,18 @@ public class AdminController extends HttpServlet {
 		}
 
 		if (page.equals("edit_product")) {
-			String id = request.getParameter("id");
-			String name = request.getParameter("name");
-			String price = request.getParameter("price");
-			String category = request.getParameter("category");
-			Product p = new Product();
-			p.setId(Integer.parseInt(id));
-			p.setName(name);
-			p.setPrice(price);
-			p.setCategory(category);
-
 			try {
+				String id = request.getParameter("id");
+				String name = request.getParameter("name");
+				String model = request.getParameter("model");
+				String price = request.getParameter("price");
+				String manuf = request.getParameter("manufacturer");
+				String system = request.getParameter("system");
+				String image = new ProductDAO().getProduct(id).getImage();
+				String screen = request.getParameter("screen");
+				String storage = request.getParameter("storage");
+				Product p = new Product(id, name, model, price, manuf, system, image, screen, storage);
+				System.out.println(p);
 				new ProductDAO().updateProduct(p);
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -104,15 +106,16 @@ public class AdminController extends HttpServlet {
 		}
 
 		if (page.equals("addingProduct")) {
+			String id = new Date().getTime()+"";//timestamp
 			String name = request.getParameter("name");
+			String model = request.getParameter("model");
 			String price = request.getParameter("price");
-			String category = request.getParameter("category");
+			String manuf = request.getParameter("manufacturer");
+			String system = request.getParameter("system");
 			String image = request.getParameter("image");
-			Product p = new Product();
-			p.setName(name);
-			p.setPrice(price);
-			p.setCategory(category);
-			p.setImage("img/" + image);
+			String screen = request.getParameter("screen");
+			String storage = request.getParameter("storage");
+			Product p = new Product(id, name, model, price, manuf, system, image, screen, storage);
 
 			try {
 				new ProductDAO().addProduct(p);

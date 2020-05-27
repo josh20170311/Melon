@@ -27,23 +27,38 @@
 	 	</div>
 	 	
 	 	<div class="signup-group">
+	 		<label>Model Number</label>
+	 		<input type="text" name="model" placeholder="model number goes here"  required>
+	 	</div>
+	 	
+	 	<div class="signup-group">
 	 		<label>Price</label>
-	 		<input type="text" name="price" placeholder="product price" required>
+	 		<input type="number" name="price" placeholder="product price" required>
 	 	</div>
 	 	
 	 	<div class="signup-group">
-	 		<label>Category</label>
-	 		<input type="text" name="category" placeholder="product category" required>
+	 		<label>Manufacturer</label>
+	 		<input type="text" name="manufacturer" placeholder="manufacturer name goes here"  required>
 	 	</div>
 	 	
 	 	<div class="signup-group">
-	 		<label>Featured</label>
-	 		<input type="text" name="featured" placeholder="yes/no" required>
+	 		<label>System</label>
+	 		<input type="text" name="system" placeholder="system name goes here"  required>
 	 	</div>
 	 	
 	 	<div class="signup-group">
 	 		 <label for="fileupload"> Select an image to upload</label>
 	 		<input type="file" name="image" required><br>
+	 	</div>
+	 	
+	 	<div class="signup-group">
+	 		<label>Screen Size</label>
+	 		<input type="text" name="screen" placeholder="screen size goes here"  required>
+	 	</div>
+	 	
+	 	<div class="signup-group">
+	 		<label>Storage</label>
+	 		<input type="text" name="storage" placeholder="storage goes here"  required>
 	 	</div>
 	 	
 	 	<div class="signup-group">

@@ -11,19 +11,7 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-	<header>
-		<h1>
-			Welcome admin
-		</h1>
-		<nav>
-			<ul>
-				<li><a href="admin?page=index">Home</a></li>
-				<li><a href="admin?page=addproduct">Add Product</a></li>
-				<li><a href="#">Settings</a></li>
-				<li><a href="#">Pages</a></li>
-			</ul>
-		</nav>
-	</header>
+	<%@include file="header.jsp" %>
 	
 	<div class="signup-header">
 	 	<h2>Edit Product</h2>
@@ -38,13 +26,25 @@
 	 		<label>Name</label>
 	 		<input type="text" name="name" value="<c:out value="${p.getName() }"></c:out>" required>
 	 	</div>
+	 	
+	 	<div class="signup-group">
+	 		<label>Model Number</label>
+	 		<input type="text" name="model" value="<c:out value="${p.getModelNumber() }"></c:out>" required>
+	 	</div>
+	 	
 	 	<div class="signup-group">
 	 		<label>Price</label>
-	 		<input type="text" name="price" value="<c:out value="${p.getPrice() }"></c:out>" required>
+	 		<input type="number" name="price" value="<c:out value="${p.getPrice() }"></c:out>" required>
 	 	</div>
+	 	
 	 	<div class="signup-group">
-	 		<label>Category</label>
-	 		<input type="text" name="category" value="<c:out value="${p.getCategory() }"></c:out>" required>
+	 		<label>Manufacturer</label>
+	 		<input type="text" name="manufacturer" value="<c:out value="${p.getManufacturer() }"></c:out>" required>
+	 	</div>
+	 	
+	 	<div class="signup-group">
+	 		<label>System</label>
+	 		<input type="text" name="system" value="<c:out value="${p.getSystem() }"></c:out>" required>
 	 	</div>
 	 	
 	 	
@@ -52,15 +52,22 @@
 	 		<label>Image</label>
 	 		<img style="height: 160px;width: 160px;" src="<c:out value="${p.getImage() }"></c:out>">
 	 	</div>
+	 	
+	 	<div class="signup-group">
+	 		<label>Screen Size</label>
+	 		<input type="text" name="screen" value="<c:out value="${p.getScreenSize() }"></c:out>" required>
+	 	</div>
+	 	
+	 	<div class="signup-group">
+	 		<label>Storage</label>
+	 		<input type="text" name="storage" value="<c:out value="${p.getStorage() }"></c:out>" required>
+	 	</div>
+	 	
 	 	<div class="signup-group">
 			<input type="submit" value="Process">	 
 		</div>
 	 </form>
 	
-	 <footer>
-		<div class="footer"> &copy; 2018 Copyright:
-	      Tiazon.com
-	    </div>
-	</footer>
+	<%@include file="footer.jsp" %>
 </body>
 </html>

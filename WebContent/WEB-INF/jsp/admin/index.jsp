@@ -17,7 +17,7 @@
 		alertMessage("${message}");
 	</script>
 	<%@include file="header.jsp" %>
-	 <sql:setDataSource user="root" password="1234" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/myproject?serverTimezone=UTC" var="ds" />
+	 <sql:setDataSource user="root" password="1234" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/melon?serverTimezone=UTC" var="ds" />
 	 
 	  <sql:query var="result" dataSource="${ds }">
 		 select * from product
@@ -29,12 +29,12 @@
 	<h2>Products List:</h2>
 		 <table>
 			<tr>
-			<th>Item id</th>
-			<th>Name</th>
-			<th>Price</th>
-			<th>Category</th>
-			<th>Image</th>
-			<th>Option</th>
+			<th style="width: 100px;">Item id</th>
+			<th style="width: 100px;">Name</th>
+			<th style="width: 100px;">Price</th>
+			<th style="width: 100px;">Manufacturer</th>
+			<th style="width: 100px;">Image</th>
+			<th style="width: 100px;">Option</th>
 		</tr>
 	</table>
 		
@@ -42,13 +42,13 @@
 		  <table style="table-layout: fixed;width: 100%;">
 		  	
 				<tr>
-					<td style="width: 50px;"><c:out value="${row.id }"></c:out></td>
-					<td style="width: 100px;"><c:out value="${row.name }"></c:out></td>
-					<td style="width: 100px;"><c:out value="${row.price }"></c:out></td>
-					<td style="width: 100px;"><c:out value="${row.category}"/></td>
-					<td style="width: 100px;"><img src="${row.image}" height="100" width="150" ></td>
-					<td style="width: 100px;"><a href="<%= request.getContextPath() %>/admin?page=edit&id=${row.id}" style="color: #6bb1f8;">edit</a> ||
-					<a href="<%= request.getContextPath() %>/admin?page=delete&id=${row.id}" style="color:#6bb1f8;">delete</a></td>
+					<td style="width: 100px;"><c:out value="${row.Product_ID }"></c:out></td>
+					<td style="width: 100px;"><c:out value="${row.Name }"></c:out></td>
+					<td style="width: 100px;"><c:out value="${row.Price }"></c:out></td>
+					<td style="width: 100px;"><c:out value="${row.Manufacturer}"/></td>
+					<td style="width: 100px;"><img src="${row.Image}" height="100" width="150" ></td>
+					<td style="width: 100px;"><a href="<%= request.getContextPath() %>/admin?page=edit&id=${row.Product_ID}" style="color: #6bb1f8;">edit</a> ||
+					<a href="<%= request.getContextPath() %>/admin?page=delete&id=${row.Product_ID}" style="color:#6bb1f8;">delete</a></td>
 				</tr>
 			</table>
 		 </c:forEach>

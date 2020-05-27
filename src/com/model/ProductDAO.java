@@ -15,7 +15,7 @@ public class ProductDAO extends DB{
 	public void deleteProduct(String id) throws SQLException {
 
 		dbConnect();
-		String sql = "Delete from product where id=?";
+		String sql = "Delete from melon.product where Product_ID=?";
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setString(1, id);
 		st.executeUpdate();
@@ -25,66 +25,83 @@ public class ProductDAO extends DB{
 
 	public Product getProduct(String id) throws SQLException {
 		dbConnect();
-		String sql = "select * from product where id=?";
-		PreparedStatement pstmt = con.prepareStatement(sql);
-		pstmt.setString(1, id);
-		ResultSet rst = pstmt.executeQuery();
-		Product p = new Product();
-		while (rst.next()) {
+		String sql = "select * from melon.product where Product_ID=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, id);
+		ResultSet rs = st.executeQuery();
+		Product p ;
+		
+		rs.next();
+		String name 	= rs.getString("Name");
+		String model 	= rs.getString("Model_Number");
+		String price 	= rs.getString("Price");
+		String manufacturer = rs.getString("Manufacturer");
+		String system 	= rs.getString("System");
+		String image 	= rs.getString("Image");
+		String screen 	= rs.getString("Screen_Size");
+		String storage 	= rs.getString("Storage");
 
-			p.setId(rst.getInt("id"));
-			p.setName(rst.getString("name"));
-			p.setPrice(rst.getString("price"));
-			p.setCategory(rst.getString("category"));
-			p.setImage(rst.getString("image"));
-		}
+		p = new Product(id,name,model,price,manufacturer,system,image,screen,storage);
+		
 		dbClose();
 		return p;
 	}
 
 	public void updateProduct(Product p) throws SQLException {
 		dbConnect();
-		String sql = "update product set name=?,price=?,category=? where id=?";
+		String sql = "update melon.product set Name=?, Model_Number=?, Price=?,"
+											+ " Manufacturer=?, product.System=?, Image=?,  "
+											+ "Screen_Size=?, Storage=? where Product_ID=?";
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setString(1, p.getName());
-		st.setString(2, p.getPrice());
-		st.setString(3, p.getCategory());
-		st.setInt(4, p.getId());
+		st.setString(2, p.getModelNumber());
+		st.setObject(3,	p.getPrice());
+		st.setString(4, p.getManufacturer());
+		st.setString(5, p.getSystem());
+		st.setString(6, p.getImage());
+		st.setString(7, p.getScreenSize());
+		st.setString(8, p.getStorage());
+		st.setString(9, p.getId());
 		st.executeUpdate();
+		System.out.println(st);
 		dbClose();
 	}
 
 	public void addProduct(Product p) throws SQLException {
 		dbConnect();
-		String sql = "Insert into product(name,price,category,image) values(?,?,?,?,?)";
+		String sql = "Insert into melon.product values(?,?,?,?,?,?,?,?,?)";
 		PreparedStatement st = con.prepareStatement(sql);
 
-		st.setString(1, p.getName());
-		st.setString(2, p.getPrice());
-		st.setString(3, p.getCategory());
-		st.setString(4, p.getImage());
+		st.setString(1, p.getId());
+		st.setString(2, p.getName());
+		st.setString(3, p.getModelNumber());
+		st.setObject(4,	p.getPrice());
+		st.setString(5, p.getManufacturer());
+		st.setString(6, p.getSystem());
+		st.setString(7, p.getImage());
+		st.setString(8, p.getScreenSize());
+		st.setString(9, p.getStorage());
 
 		st.executeUpdate();
 		dbClose();
 	}
 	public ArrayList<Product> fetchProduct() throws SQLException {
 		dbConnect();
-		String sql = "Select * from product";
+		String sql = "Select * from melon.product";
 		PreparedStatement st = con.prepareStatement(sql);
 		ResultSet rs = st.executeQuery();
 		while (rs.next()) {
-			int id = rs.getInt("id");
-			String name = rs.getString("name");
-			String category = rs.getString("category");
-			String price = rs.getString("price");
-			String image = rs.getString("image");
+			String id 		= rs.getString("Product_ID");
+			String name 	= rs.getString("Name");
+			String model 	= rs.getString("Model_Number");
+			String price 	= rs.getString("Price");
+			String manufacturer = rs.getString("Manufacturer");
+			String system 	= rs.getString("System");
+			String image 	= rs.getString("Image");
+			String screen 	= rs.getString("Screen_Size");
+			String storage 	= rs.getString("Storage");
 
-			Product p = new Product();
-			p.setCategory(category);
-			p.setId(id);
-			p.setImage(image);
-			p.setName(name);
-			p.setPrice(price);
+			Product p = new Product(id,name,model,price,manufacturer,system,image,screen,storage);
 			list.add(p);
 			p = null;
 

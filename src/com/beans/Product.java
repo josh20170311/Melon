@@ -6,17 +6,46 @@ import java.util.Comparator;
 
 public class Product implements Comparable<Product> {
 
-	private int id;
-	private String name;
-	private String price;
-	private String category;
-	private String image;
+	public Product(String id, String name, String modelNumber, String price, String manufacturer, String system,
+			String image, String screenSize, String storage) {
+		this.id = id;
+		this.name = name;
+		this.modelNumber = modelNumber;
+		this.price = price;
+		this.manufacturer = manufacturer;
+		this.system = system;
+		this.image = image;
+		this.screenSize = screenSize;
+		this.storage = storage;
+	}
 
-	public int getId() {
+	public Product() {
+		this.id = "";
+		this.name = "";
+		this.modelNumber = "";
+		this.price = "";
+		this.manufacturer = "";
+		this.system = "";
+		this.image = "";
+		this.screenSize = "";
+		this.storage = "";
+	}
+	
+	private String id;
+	private String name;
+	private String modelNumber;
+	private String price;
+	private String manufacturer;
+	private String system;
+	private String image;
+	private String screenSize;
+	private String storage;
+	
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -28,6 +57,14 @@ public class Product implements Comparable<Product> {
 		this.name = name;
 	}
 
+	public String getModelNumber() {
+		return modelNumber;
+	}
+
+	public void setModelNumber(String modelNumber) {
+		this.modelNumber = modelNumber;
+	}
+
 	public String getPrice() {
 		return price;
 	}
@@ -36,14 +73,22 @@ public class Product implements Comparable<Product> {
 		this.price = price;
 	}
 
-	public String getCategory() {
-		return category;
+	public String getManufacturer() {
+		return manufacturer;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
 	}
-	
+
+	public String getSystem() {
+		return system;
+	}
+
+	public void setSystem(String system) {
+		this.system = system;
+	}
+
 	public String getImage() {
 		return image;
 	}
@@ -52,11 +97,31 @@ public class Product implements Comparable<Product> {
 		this.image = image;
 	}
 
+	public String getScreenSize() {
+		return screenSize;
+	}
+
+	public void setScreenSize(String screenSize) {
+		this.screenSize = screenSize;
+	}
+
+	public String getStorage() {
+		return storage;
+	}
+
+	public void setStorage(String storage) {
+		this.storage = storage;
+	}
+
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", category=" + category + ", featured="
-				+ ", image=" + image + "]";
+		return "Product [id=" + id + ", name=" + name + ", modelNumber=" + modelNumber + ", price=" + price
+				+ ", manufacturer=" + manufacturer + ", system=" + system + ", image=" + image + ", screenSize="
+				+ screenSize + ", storage=" + storage + "]";
 	}
+
+	
+
 
 	public boolean check(ArrayList<String> cartlist, String id2) {
 		for (String id : cartlist) {
