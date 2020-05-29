@@ -24,14 +24,14 @@ public class Home extends HttpServlet {
 	ArrayList<String> cartlist = new ArrayList<>();
 	ArrayList<Member> memberList = new ArrayList<>();
 
-	HttpSession session;
+	HttpSession session; 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
 
-		try {
+		try { 
 			productList = new ProductDAO().fetchProduct();
 
 		} catch (SQLException e) {
@@ -211,7 +211,7 @@ public class Home extends HttpServlet {
 			session.setAttribute("address", m.getAddress());
 			session.setAttribute("email", 	m.getEmail());
 			session.setAttribute("name", 	m.getName());
-			session.setAttribute("id", 		id);
+			session.setAttribute("memberId", 		id);
 			request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
 		} else {//
 			request.setAttribute("msg", "Invalid Crediantials");

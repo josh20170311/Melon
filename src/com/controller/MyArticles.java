@@ -29,11 +29,11 @@ public class MyArticles extends HttpServlet {
 			return;
 		}//沒登入 跳轉至login
 		
-		try {
-			int userId = (int)session.getAttribute("userId");
-			List<Article> myArticleInfos = new ArticleDAO().getUserArticleInfos(userId);
+		try { 
+			String memberId = session.getAttribute("memberId").toString();
+			List<Article> myArticleInfos = new ArticleDAO().getMemberArticleInfos(memberId);
 			
-			int id = (request.getParameter("id") == null)?myArticleInfos.get(0).getId():Integer.parseInt(request.getParameter("id"));
+			String id = (request.getParameter("id") == null)?myArticleInfos.get(0).getId():(request.getParameter("id"));
 			Article article = new ArticleDAO().getArticle(id);
 			request.setAttribute("article", article);
 			request.setAttribute("myArticleInfos", myArticleInfos);

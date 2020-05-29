@@ -18,7 +18,7 @@ public class MemberDAO extends DB{
 
 		st.setString(1, member.getId());
 		st.setString(2, member.getName());
-		st.setString(3, member.getGender());
+		st.setString(3, member.getGender()); 
 		st.setString(4, member.getAddress());
 		st.setString(5, member.getPhone());
 		st.setString(6, member.getPassword());

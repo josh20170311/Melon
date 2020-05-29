@@ -20,11 +20,11 @@ public class AdminController extends HttpServlet {
 		String page = request.getParameter("page");
 		if (page == null) {
 			request.getRequestDispatcher("/WEB-INF/jsp/admin/login.jsp").forward(request, response);
-			
+			 
 		} else {
 			doPost(request, response);
 		}
-	}
+	} 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -116,7 +116,8 @@ public class AdminController extends HttpServlet {
 			String screen = request.getParameter("screen");
 			String storage = request.getParameter("storage");
 			Product p = new Product(id, name, model, price, manuf, system, image, screen, storage);
-
+			System.out.println("add product");
+			System.out.println(p);
 			try {
 				new ProductDAO().addProduct(p);
 			} catch (SQLException e) {

@@ -3,15 +3,9 @@ package com.beans;
 import java.util.ArrayList;
 
 public class Member {
-
-	@Override
-	public String toString() {
-		return "Member [id=" + id + ", name=" + name + ", email=" + email + ", username="  + ", password="
-				+ password + ", address=" + address + "]";
-	}
-
+	
 	private String id;//會員識別碼 (帳號)
-	private String name;//會員姓名
+	private String name;//會員姓名 
 	private String email;//會員電子郵件帳號
 	private String gender;//會員性別
 	private String password;//會員登入密碼
@@ -107,5 +101,14 @@ public class Member {
 		}
 		return "";
 	}
+
+	@Override
+	public String toString() {
+		return "Member [id=" + id + ", name=" + name + ", email=" + email + ", gender=" + gender + ", password="
+				+ password + ", address=" + address + ", phone=" + phone + "]";
+	}
+	
+	
+	
 
 }

@@ -19,7 +19,7 @@ public class Product implements Comparable<Product> {
 		this.storage = storage;
 	}
 
-	public Product() {
+	public Product() { 
 		this.id = "";
 		this.name = "";
 		this.modelNumber = "";
@@ -31,7 +31,7 @@ public class Product implements Comparable<Product> {
 		this.storage = "";
 	}
 	
-	private String id;
+	private String id; 
 	private String name;
 	private String modelNumber;
 	private String price;

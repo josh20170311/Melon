@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.beans.Article;
 import com.model.ArticleDAO;
@@ -25,20 +26,27 @@ public class AddArticle extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		try {
-			String title = request.getParameter("title");
+		request.setCharacterEncoding("UTF-8");
+		try { 
+			String title = request.getParameter("title"); 
 			String content = request.getParameter("content");
-			Date d = new Date();
-			String memberId = request.getSession().getAttribute("userId").toString();
-			int productId = Integer.parseInt(request.getParameter("productId"));
+			Date uploadTime = new Date();
 			
-			new ArticleDAO().addArticle(new Article(title,
-													content,
-													new Date(),
-													memberId,
-													productId
-													)
-										);
+			HttpSession session = request.getSession();
+			session = (HttpSession)session.getAttribute("session");
+			String memberId = session.getAttribute("memberId").toString();
+			String productId = request.getParameter("productId");
+			
+			Article a = new Article();
+			
+			a.setId("A"+new Date().getTime());
+			a.setTitle(title);
+			a.setContent(content);
+			a.setUploadTime(uploadTime);
+			a.setMemberId(memberId);
+			a.setProductId(productId);
+			
+			new ArticleDAO().addArticle(a);
 			request.getRequestDispatcher("MyArticles").forward(request, response);
 
 		} catch (Exception e) {

@@ -14,14 +14,15 @@ public class ArticleDAO extends DB{
 	
 	public void addArticle(Article article) throws SQLException {
 		dbConnect();
-		String sql = "Insert into article(articleTitle, articleContent, articleUploadTime, articleAuthorId, articleProductId ) values(?,?,?,?,?)";
+		String sql = "Insert into article(Article_ID, Member_ID, Title, Content, Product_ID, Upload_Time ) values(?,?,?,?,?,?)";
 		PreparedStatement st = con.prepareStatement(sql);
 
-		st.setString(1, article.getTitle());
-		st.setString(2, article.getContent());
-		st.setObject(3, article.getUploadTime());
-		st.setString(4, article.getAuthorId());
-		st.setInt(5, article.getProductId());
+		st.setString(1, article.getId());
+		st.setString(2, article.getMemberId());
+		st.setString(3, article.getTitle());
+		st.setString(4, article.getContent());
+		st.setString(5, article.getProductId());
+		st.setObject(6, article.getUploadTime());
 
 		st.executeUpdate();
 		dbClose();
@@ -29,48 +30,47 @@ public class ArticleDAO extends DB{
 
 	
 	
-
+ 
 	/**
 	 * 怕內容太大讀太久,先抓文章資訊做出列表, 之後再用getArticle(id)抓文章內容
 	 * 
 	 * @return ArrayList<Article>
 	 * @throws SQLException
 	 */
-	public ArrayList<Article> getArticleInfos(Object userId, Object audited) throws SQLException {
+	public ArrayList<Article> getArticleInfos(Object memberId, Object audited) throws SQLException {
 		System.out.println();
 		System.out.println("in fetchArticleInfos");
 		
 		dbConnect();
 		String sql;
-		sql = "Select articleId, articleTitle, articleUploadTime, articleProductId, articleAuthorId, audited from article where audited LIKE ? and articleAuthorId LIKE ?;";
+		sql = "Select Article_ID, Title, Upload_Time, Product_ID, Member_ID, Audited from article where Audited LIKE ? and Member_ID LIKE ?;";
 		PreparedStatement st = con.prepareStatement(sql);
 		
 		st.setObject(1, audited);
-		st.setObject(2,userId);
+		st.setObject(2,memberId);
 		
 		//System.out.println(st); //檢查query 字串
 		ResultSet rs = st.executeQuery();
 
 		while (rs.next()) {
-			int id = rs.getInt("articleId");
-			String authorid = rs.getString("articleAuthorId");
-			int productid = rs.getInt("articleProductId");
-			Date t = (Date) rs.getObject("articleUploadTime");
-			String title = rs.getString("articleTitle");
-			Boolean isaudited = rs.getBoolean("audited");
+			String id = rs.getString("Article_ID");
+			String memberid = rs.getString("Member_ID");
+			String productid = rs.getString("Product_ID");
+			Date t = (Date) rs.getObject("Upload_Time");
+			String title = rs.getString("Title");
+			Boolean isaudited = rs.getBoolean("Audited");
 
 			Article article = new Article();
 			article.setTitle(title);
 			article.setId(id);
-			article.setAuthorId(authorid);
+			article.setMemberId(memberid);
 			article.setProductId(productid);
 			article.setAudited(isaudited);
-
 			article.setUploadTime(t);
+			
 			System.out.println(article);
 
 			titleList.add(article);
-			t = null;
 		}
 
 		dbClose();
@@ -91,8 +91,8 @@ public class ArticleDAO extends DB{
 	 * @return
 	 * @throws SQLException
 	 */
-	public ArrayList<Article> getUserArticleInfos(int userId) throws SQLException {
-		return this.getArticleInfos(userId, "%");
+	public ArrayList<Article> getMemberArticleInfos(String memberId) throws SQLException {
+		return this.getArticleInfos(memberId, "%");
 	}
 	
 	/**
@@ -110,33 +110,33 @@ public class ArticleDAO extends DB{
 	 * @return article
 	 * @throws SQLException
 	 */
-	public Article getArticle(int id) throws SQLException {
+	public Article getArticle(String id) throws SQLException {
 		dbConnect();
 
 		Article article = new Article();
-		String sql = "SELECT * FROM article where articleId = ?;";
+		String sql = "SELECT * FROM article where Article_ID = ?;";
 		PreparedStatement st = con.prepareStatement(sql);
-		st.setInt(1, id);
+		st.setString(1, id);
 		ResultSet rs = st.executeQuery();
 		System.out.println();
 		System.out.println("in getArticle");
 
 		while (rs.next()) {
 			article.setId(id);
-			article.setAuthorId(rs.getString("articleAuthorId"));
-			article.setProductId(rs.getInt("articleProductId"));
-			article.setContent(rs.getString("articleContent"));
-			article.setTitle(rs.getString("articleTitle"));
-			article.setUploadTime((Date) rs.getObject("articleUploadTime"));
-			article.setAudited((Boolean)rs.getObject("audited"));
+			article.setMemberId(rs.getString("Member_ID"));
+			article.setProductId(rs.getString("Product_ID"));
+			article.setContent(rs.getString("Content"));
+			article.setTitle(rs.getString("Title"));
+			article.setUploadTime((Date) rs.getObject("Upload_Time"));
+			article.setAudited(rs.getBoolean("Audited"));
 			System.out.println(article.toInfoString());
 		}
 		dbClose();
 
 
-		Member m = new MemberDAO().getMember(article.getAuthorId());
+		Member m = new MemberDAO().getMember(article.getMemberId());
 		Product p = new ProductDAO().getProduct(article.getProductId() + "");
-		article.setAuthorName(m.getName());
+		article.setMemberName(m.getName());
 		article.setProductName(p.getName());
 
 		return article;

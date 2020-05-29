@@ -52,7 +52,7 @@
 					
 						<pre style="white-space: pre-wrap;word-wrap: break-word;">
 <c:out value="Title : ${article.getTitle() }"></c:out>
-<c:out value="Author : ${article.getAuthorName() }"></c:out>
+<c:out value="Author : ${article.getMemberName() }"></c:out>
 <c:out value="Product : ${article.getProductName() }"></c:out>
 <c:out value="Time : ${article.getUploadTime() }"></c:out>
 <c:out value="Audited : ${article.getAudited() }"></c:out>

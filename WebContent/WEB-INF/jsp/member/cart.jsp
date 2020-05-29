@@ -38,7 +38,7 @@
 		<tr>
 			<th>Item Name</th>
 			<th>Price</th>
-			<th>Category</th>
+			<th>Manufacturer</th>
 			<th>Remove Item</th>
 		</tr>
 	</table>
@@ -54,7 +54,7 @@
 				<tr>
 					<td style="width: 100px;"><img src="${Product.getImage()}" height="100" width="150" >  (<c:out value="${Product.getName()}"/>)</td>
 					<td style="width: 50px;"><c:out value="${Product.getPrice()}"/></td>
-					<td style="width: 100px;"><c:out value="${Product.getCategory()}"/></td>
+					<td style="width: 100px;"><c:out value="${Product.getManufacturer()}"/></td>
 					<td style="width: 100px;"><a href="Home?page=remove&id=<c:out value="${Product.getId()}"/>"><span class="btn btn-danger">X</span></a></td>
 				</tr>
 			</table>

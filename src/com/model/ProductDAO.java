@@ -21,7 +21,7 @@ public class ProductDAO extends DB{
 		st.executeUpdate();
 		dbClose();
 
-	}
+	} 
 
 	public Product getProduct(String id) throws SQLException {
 		dbConnect();
