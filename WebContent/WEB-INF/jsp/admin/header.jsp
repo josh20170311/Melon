@@ -8,7 +8,7 @@
 			<ul>
 				<li><a href="admin?page=index">Home</a></li>
 				<li><a href="admin?page=addproduct">Add Product</a></li>
-				<li><a href="Articles?action=admin">Articles</a></li>
+				<li><a href="admin?page=articles">Articles</a></li>
 			</ul>
 		</nav>
 </header>

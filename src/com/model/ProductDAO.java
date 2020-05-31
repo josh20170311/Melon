@@ -110,7 +110,50 @@ public class ProductDAO extends DB{
 		dbClose();
 		return list;
 	}
+	public ArrayList<Product> fetchProduct(String manufacturer) throws SQLException {
+		dbConnect();
+		String sql = "Select * from melon.product where Manufacturer=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, manufacturer );
+		ResultSet rs = st.executeQuery();
+		while (rs.next()) {
+			String id 		= rs.getString("Product_ID");
+			String name 	= rs.getString("Name");
+			String model 	= rs.getString("Model_Number");
+			String price 	= rs.getString("Price");
+			 manufacturer = rs.getString("Manufacturer");
+			String system 	= rs.getString("System");
+			String image 	= rs.getString("Image");
+			String screen 	= rs.getString("Screen_Size");
+			String storage 	= rs.getString("Storage");
 
+			Product p = new Product(id,name,model,price,manufacturer,system,image,screen,storage);
+			list.add(p);
+			p = null;
+
+		}
+
+		dbClose();
+		return list;
+	}
+
+	public ArrayList<String> getManufList() {
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			dbConnect();
+			String sql = "SELECT distinct Manufacturer FROM melon.product order by Manufacturer  ;";
+			PreparedStatement st = con.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				list.add( rs.getString("Manufacturer")) ;
+			}
 	
+			dbClose();
+			System.out.println(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 }

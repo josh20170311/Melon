@@ -7,10 +7,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 
-import com.beans.Product;
+import java.util.*;
+
+import com.beans.*;
 import com.model.*;
+
 
 public class AdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,101 +33,112 @@ public class AdminController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String page = request.getParameter("page");
 		
-		if (page.equals("admin-login-form")) {
-			String username = request.getParameter("username");
-			String password = request.getParameter("password");
+		String id;
+		Product p;
+		
+		switch(page) {
+			case "admin-login-form":
+				String username = request.getParameter("username");
+				String password = request.getParameter("password");
 
-			if (username.equals("admin") && password.equals("admin@1234")) {
+				if (username.equals("admin") && password.equals("admin@1234")) {
+					request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
+
+				} else {
+					request.setAttribute("msg", "Invalid Crediantials");
+					request.setAttribute("username", username);
+					request.getRequestDispatcher("/WEB-INF/jsp/admin/login.jsp").forward(request, response);
+
+				}
+				break;
+			case "delete":
+				id = request.getParameter("id");
+
+				try {
+					new ProductDAO().deleteProduct(id);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+
+
+				request.setAttribute("message", "Product deleted successfully");
 				request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
+				break;
+			case "index":
+				request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
+				break;
+			case "addproduct":
+				request.getRequestDispatcher("/WEB-INF/jsp/admin/addProduct.jsp").forward(request, response);
+				break;
+			case "edit":
+				id = request.getParameter("id");
 
-			} else {
-				request.setAttribute("msg", "Invalid Crediantials");
-				request.setAttribute("username", username);
-				request.getRequestDispatcher("/WEB-INF/jsp/admin/login.jsp").forward(request, response);
+				
+				try {
+					p = new ProductDAO().getProduct(id);
+					request.setAttribute("p", p);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 
-			}
-		}
-
-		if (page.equals("delete")) {
-			String id = request.getParameter("id");
-
-			try {
-				new ProductDAO().deleteProduct(id);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			//JOptionPane.showMessageDialog(null, "Product deleted successfully", "Info",	JOptionPane.INFORMATION_MESSAGE);
-			request.setAttribute("message", "Product deleted successfully");
-			request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
-
-		}
-
-		if (page.equals("index")) {
-			request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
-		}
-
-		if (page.equals("addproduct")) {
-			request.getRequestDispatcher("/WEB-INF/jsp/admin/addProduct.jsp").forward(request, response);
-		}
-
-		if (page.equals("edit")) {
-			String id = request.getParameter("id");
-
-			Product p = null;
-			try {
-				p = new ProductDAO().getProduct(id);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			request.setAttribute("p", p);
-			request.getRequestDispatcher("/WEB-INF/jsp/admin/editProduct.jsp").forward(request, response);
-		}
-
-		if (page.equals("edit_product")) {
-			try {
-				String id = request.getParameter("id");
+				request.getRequestDispatcher("/WEB-INF/jsp/admin/editProduct.jsp").forward(request, response);
+				break;
+			case "edit_product":
+				try {
+							id = request.getParameter("id");
+					String name = request.getParameter("name");
+					String model = request.getParameter("model");
+					String price = request.getParameter("price");
+					String manuf = request.getParameter("manufacturer");
+					String system = request.getParameter("system");
+					String image = new ProductDAO().getProduct(id).getImage();
+					String screen = request.getParameter("screen");
+					String storage = request.getParameter("storage");
+					 p = new Product(id, name, model, price, manuf, system, image, screen, storage);
+					System.out.println(p);
+					new ProductDAO().updateProduct(p);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				request.setAttribute("message", "Product details updated successfully");
+				request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
+				break;
+			case "addingProduct":
+				 id = new Date().getTime()+"";//timestamp
 				String name = request.getParameter("name");
 				String model = request.getParameter("model");
 				String price = request.getParameter("price");
 				String manuf = request.getParameter("manufacturer");
 				String system = request.getParameter("system");
-				String image = new ProductDAO().getProduct(id).getImage();
+				String image = request.getParameter("image");
 				String screen = request.getParameter("screen");
 				String storage = request.getParameter("storage");
-				Product p = new Product(id, name, model, price, manuf, system, image, screen, storage);
+				 p = new Product(id, name, model, price, manuf, system, image, screen, storage);
+				System.out.println("add product");
 				System.out.println(p);
-				new ProductDAO().updateProduct(p);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			//JOptionPane.showMessageDialog(null, "Product details updated successfully", "Info",	JOptionPane.INFORMATION_MESSAGE);
-			request.setAttribute("message", "Product details updated successfully");
-			request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
-		}
+				try {
+					new ProductDAO().addProduct(p);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				request.setAttribute("message", "Product added Successfully");
+				request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
+				break;
+			case "articles":
+				try {
+					if(request.getParameter("action") != null && request.getParameter("action").equals("audit"))
+						new ArticleDAO().setAudited(request.getParameter("id"), !new ArticleDAO().getArticle(request.getParameter("id")).getAudited());
 
-		if (page.equals("addingProduct")) {
-			String id = new Date().getTime()+"";//timestamp
-			String name = request.getParameter("name");
-			String model = request.getParameter("model");
-			String price = request.getParameter("price");
-			String manuf = request.getParameter("manufacturer");
-			String system = request.getParameter("system");
-			String image = request.getParameter("image");
-			String screen = request.getParameter("screen");
-			String storage = request.getParameter("storage");
-			Product p = new Product(id, name, model, price, manuf, system, image, screen, storage);
-			System.out.println("add product");
-			System.out.println(p);
-			try {
-				new ProductDAO().addProduct(p);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			//JOptionPane.showMessageDialog(null, "Product added Successfully", "Info", JOptionPane.INFORMATION_MESSAGE);
-			request.setAttribute("message", "Product added Successfully");
-			request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
+					ArrayList<Article> list = new ArticleDAO().getAllArticleInfos();
+					id = (request.getParameter("id") == null)?id=list.get(0).getId():request.getParameter("id");
+					Article a = new ArticleDAO().getArticle(id);
+					request.setAttribute("list",list);
+					request.setAttribute("article", a);
+					request.getRequestDispatcher("/WEB-INF/jsp/admin/articles.jsp").forward(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
 		}
 	}
 

@@ -74,4 +74,14 @@
     <servlet-name>MyArticles</servlet-name>
     <url-pattern>/MyArticles</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Product</display-name>
+    <servlet-name>Product</servlet-name>
+    <servlet-class>com.controller.ProductController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Product</servlet-name>
+    <url-pattern>/Product</url-pattern>
+  </servlet-mapping>
 </web-app>

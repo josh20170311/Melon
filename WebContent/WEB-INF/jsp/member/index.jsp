@@ -38,13 +38,14 @@
  				<%--左側選單_開始 --%>
  				<div class="col-md-2"><%//bootstrap  %>
  						<div class="list-group">
-								  <a href="#" class="list-group-item" style="background:  #e8f29d;">
+								  <a href="Home?catalog=all" class="list-group-item" style="background:  #e8f29d;">
 								    All Products
 								  </a>
-								  <a href="#" class="list-group-item">Apple</a>
-								  <a href="#" class="list-group-item">Asus</a>
-								  <a href="#" class="list-group-item">Samsung</a>
-								  <a href="#" class="list-group-item">Xiaomi</a>
+								  <c:forEach items="${manuflist}" var="manuf">
+								  	<a href="Home?catalog=${manuf}" class="list-group-item" >
+								    	<c:out value="${manuf }"></c:out>
+								  	</a>
+								  </c:forEach>
 						</div> 
  				</div>
 				<%--左側選單_結束 --%>
@@ -69,7 +70,9 @@
 					<%-- 產生產品清單_開始  --%>
  					<c:forEach items="${list }" var="product">
 		 					<div class="col-md-4">
-		 						<img src="${product.getImage() }" class="img-responsive" ><br>
+		 						<a href="Product?id=${product.getId() }">
+		 							<img src="${product.getImage() }" class="img-responsive" ><br>
+		 						</a>
 		 						<div class="text-center"><a style="color: black;"><c:out value="${product.getName() }"></c:out></a></div>	
 		 						<p style="text-align: center;"> $  <c:out value="${ product.getPrice() }"></c:out></p>
 		 						

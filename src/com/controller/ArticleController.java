@@ -24,7 +24,7 @@ public class ArticleController extends HttpServlet {
 		
 		try {
 			ArticleDAO articleDAO = new ArticleDAO();
-			ArrayList<Article> titleList = articleDAO.getAllArticleInfos();
+			ArrayList<Article> titleList = articleDAO.getAuditedArticleInfos();
 			id = (request.getParameter("id") == null) ? titleList.get(0).getId(): (request.getParameter("id"));
 			Article a = articleDAO.getArticle(id);
 			request.setAttribute("article", a);// 要顯示的文章

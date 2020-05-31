@@ -21,6 +21,7 @@ public class Home extends HttpServlet {
 	}
 
 	ArrayList<Product> productList = new ArrayList<>();
+	ArrayList<String> manufList = new ArrayList<>();
 	ArrayList<String> cartlist = new ArrayList<>();
 	ArrayList<Member> memberList = new ArrayList<>();
 
@@ -30,9 +31,16 @@ public class Home extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-
+		String catalog = request.getParameter("catalog");
 		try { 
-			productList = new ProductDAO().fetchProduct();
+			if(catalog == null ||catalog.equals("all"))
+				productList = new ProductDAO().fetchProduct();
+			else {
+				productList = new ProductDAO().fetchProduct(catalog);
+			}
+			
+			
+			manufList = new ProductDAO().getManufList();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -41,6 +49,7 @@ public class Home extends HttpServlet {
 		session = request.getSession();
 		session.setAttribute("cartlist", cartlist);
 		session.setAttribute("list", productList);
+		session.setAttribute("manuflist", manufList);
 
 		
 		String page = request.getParameter("page");
@@ -96,6 +105,7 @@ public class Home extends HttpServlet {
 					productList = new Product().hightolow(productList);
 
 				session.setAttribute("list", productList);
+				request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
 				break;
 			case "remove":
 				String itemId = request.getParameter("id");

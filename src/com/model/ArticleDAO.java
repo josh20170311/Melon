@@ -141,6 +141,19 @@ public class ArticleDAO extends DB{
 
 		return article;
 	}
+	public void setAudited(String articleId, Boolean isAudited) {
+		String sql = "update melon.Article set Audited=? where Article_ID = ?";
+		try {
+			dbConnect();
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setBoolean(1, isAudited);
+			st.setString(2, articleId);
+			st.execute();
+			dbClose();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	
 }
