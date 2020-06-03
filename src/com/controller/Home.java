@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.beans.*;
 import com.model.*;
+import com.Util;
 
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -150,16 +151,19 @@ public class Home extends HttpServlet {
 		
 
 		String id 			= request.getParameter("id");
-		String name 		= request.getParameter("name");
+		String name 			= request.getParameter("name");
 		String gender 		= request.getParameter("gender");
 		String address 		= request.getParameter("address");
 		String phone 		= request.getParameter("phone");
-		String email 		= request.getParameter("email");
+		String email 			= request.getParameter("email");
 		String password_1 	= request.getParameter("password_1");
 		String password_2 	= request.getParameter("password_2");
 
 		if (password_1.equals(password_2)) {
-
+			String[] temp = Util.hashPassword(password_1);
+			String hashedP = temp[0];
+			String salt = temp[1];
+			
 			Member member = new Member();
 			member.setId(id);
 			member.setName(name);
@@ -167,7 +171,8 @@ public class Home extends HttpServlet {
 			member.setAddress(address);
 			member.setPhone(phone);
 			member.setEmail(email);
-			member.setPassword(password_1);
+			member.setPassword(hashedP);
+			member.setSalt(salt);
 			
 			try {
 				new MemberDAO().addMember(member);

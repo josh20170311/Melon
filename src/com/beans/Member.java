@@ -11,6 +11,17 @@ public class Member {
 	private String password;//會員登入密碼
 	private String address;//會員收貨地址
 	private String phone;
+	private String salt;
+
+	
+	
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 
 	public String getId() {
 		return id;

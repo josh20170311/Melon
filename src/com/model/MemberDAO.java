@@ -13,7 +13,7 @@ public class MemberDAO extends DB{
 
 	public void addMember(Member member) throws SQLException {
 		dbConnect();
-		String sql = "Insert into melon.member(Member_ID, Member_Name, Gender, Address, Phone, Password, Email) values(?,?,?,?,?,?,?)";
+		String sql = "Insert into melon.member(Member_ID, Member_Name, Gender, Address, Phone, Password, Email, Salt) values(?,?,?,?,?,?,?,?)";
 		PreparedStatement st = con.prepareStatement(sql);
 
 		st.setString(1, member.getId());
@@ -23,6 +23,7 @@ public class MemberDAO extends DB{
 		st.setString(5, member.getPhone());
 		st.setString(6, member.getPassword());
 		st.setString(7, member.getEmail());
+		st.setString(8, member.getSalt());
 
 		st.executeUpdate();
 		dbClose();
@@ -42,6 +43,7 @@ public class MemberDAO extends DB{
 			String phone 	= rs.getString("Phone");
 			String password = rs.getString("Password");
 			String email	= rs.getString("Email");
+			String salt = rs.getString("Salt");
 			
 			Member m = new Member();
 			m.setId(id);
@@ -51,6 +53,7 @@ public class MemberDAO extends DB{
 			m.setPhone(phone);
 			m.setEmail(email);
 			m.setPassword(password);
+			m.setSalt(salt);
 			memberList.add(m);
 			m = null;
 		}
@@ -99,6 +102,7 @@ public class MemberDAO extends DB{
 			m.setPhone(		rs.getString("Phone"));
 			m.setEmail(		rs.getString("Email"));
 			m.setPassword(	rs.getString("Password"));
+			m.setSalt(		rs.getString("Salt"));
 			
 			System.out.println(m);
 		}
