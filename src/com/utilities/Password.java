@@ -1,9 +1,17 @@
-package com;
+package com.utilities;
+
 
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 
-public class Util {
+public class Password {
+	public static void main(String args[]) {
+		byte b = -128;
+		System.out.println(Integer.toString((int)b, 2));
+		System.out.println((byte)(b >>> 1));
+		System.out.println(Integer.toString((int)b, 2));
+	}
+	
 	/**
 	 * 
 	 * @param rawP
@@ -46,9 +54,9 @@ public class Util {
 	public static String bytesToHexString(byte[] bb) {
 		StringBuilder sb = new StringBuilder();
 		for(byte b :bb) {
-			//java ��Integer.toHexString�|�۰ʬٲ����䪺�s �ҥH�������k�U4bits
-			int l = (int)(b >> 4) & 0xf;//�̰��줸��1�ɬ��t�� �নint(32bits)���줸�|�X�{�ܦh1 �ҥH�ݭn�B�n����4bits
-			int r = (int)b & 0xf;
+			//java 的Integer.toHexString會省略左邊的0 所以分成左右各4bits
+			int l = (b >>> 4) & 0xf;//java的byte 在做位元運算時會先轉成int ,如果b最高位元為一表示是負數轉成int後左邊會出現連續的1,所以需要一個遮罩維持4bits
+			int r = b & 0xf;
 
 			sb.append(Integer.toHexString(l));
 			sb.append(Integer.toHexString(r));

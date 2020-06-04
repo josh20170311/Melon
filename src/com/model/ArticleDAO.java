@@ -78,7 +78,54 @@ public class ArticleDAO extends DB{
 	}
 	
 	/**
-	 * 搜尋全部核准的文章
+	 * return Audited Articles which Product_ID = productId
+	 * 
+	 * 
+	 * @param productId
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<Article> getProductArticleInfos(String productId) throws SQLException {
+		System.out.println();
+		System.out.println("in getProductArticleInfos");
+		
+		dbConnect();
+		String sql;
+		sql = "Select Article_ID, Title, Upload_Time, Product_ID, Member_ID, Audited from article where Product_ID = ? and Audited = true;";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setObject(1, productId);
+		
+		//System.out.println(st); //檢查query 字串
+		ResultSet rs = st.executeQuery();
+
+		while (rs.next()) {
+			String id = rs.getString("Article_ID");
+			String memberid = rs.getString("Member_ID");
+			String productid = rs.getString("Product_ID");
+			Date t = (Date) rs.getObject("Upload_Time");
+			String title = rs.getString("Title");
+			Boolean isaudited = rs.getBoolean("Audited");
+
+			Article article = new Article();
+			article.setTitle(title);
+			article.setId(id);
+			article.setMemberId(memberid);
+			article.setProductId(productid);
+			article.setAudited(isaudited);
+			article.setUploadTime(t);
+			
+			System.out.println(article);
+
+			titleList.add(article);
+		}
+
+		dbClose();
+		return titleList;
+	}
+	
+	/**
+	 * 搜尋全部已核准的文章
 	 * @return
 	 * @throws SQLException
 	 */
@@ -87,7 +134,7 @@ public class ArticleDAO extends DB{
 	}
 
 	/**
-	 * 搜尋使用者全部的文章
+	 * 搜尋該使用者全部的文章
 	 * @return
 	 * @throws SQLException
 	 */
@@ -105,7 +152,7 @@ public class ArticleDAO extends DB{
 	}
 	
 	/**
-	 * 搜尋文章內容
+	 * 取得文章內容
 	 * @param id
 	 * @return article
 	 * @throws SQLException
@@ -141,6 +188,12 @@ public class ArticleDAO extends DB{
 
 		return article;
 	}
+	/**
+	 * 主要是給管理員設定文章是否公開出現在網頁上
+	 * 
+	 * @param articleId
+	 * @param isAudited
+	 */
 	public void setAudited(String articleId, Boolean isAudited) {
 		String sql = "update melon.Article set Audited=? where Article_ID = ?";
 		try {

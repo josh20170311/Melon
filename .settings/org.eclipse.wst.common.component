@@ -2,7 +2,7 @@
     <wb-module deploy-name="Melon">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="Melon"/>
+        <property name="context-root" value="/"/>
         <property name="java-output-path" value="/Melon/build/classes"/>
     </wb-module>
 </project-modules>

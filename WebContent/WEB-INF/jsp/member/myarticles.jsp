@@ -35,7 +35,7 @@
 	<div class="tiazon-content"><%//style.css  %>
 	 	<div class="container"><%//bootstrap  %>
 	 		<div class="row"><%//bootstrap  %>
-	 					<%--左側文章清單_開始 --%>
+	 			<%--左側文章清單_開始 --%>
  				<div class="col-md-4"><%//bootstrap  %>
  						<div class="list-group">
 								<c:forEach items="${myArticleInfos}" var="title">

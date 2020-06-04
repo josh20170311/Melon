@@ -1,6 +1,8 @@
 package com.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +29,11 @@ public class ProductController extends HttpServlet {
 		try {
 			Product p = new ProductDAO().getProduct(id);
 			request.setAttribute("product", p);
+			
+			ArticleDAO articleDAO = new ArticleDAO();
+			ArrayList<Article> infoList = articleDAO.getProductArticleInfos(id);
+			request.setAttribute("productArticleInfos", infoList);
+			
 			request.getRequestDispatcher("/WEB-INF/jsp/member/productInfo.jsp").forward(request, response);
 		} catch (Exception e) {
 

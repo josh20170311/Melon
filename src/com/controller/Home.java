@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.beans.*;
 import com.model.*;
-import com.Util;
+import com.utilities.Password;
 
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -160,7 +160,7 @@ public class Home extends HttpServlet {
 		String password_2 	= request.getParameter("password_2");
 
 		if (password_1.equals(password_2)) {
-			String[] temp = Util.hashPassword(password_1);
+			String[] temp = Password.hashPassword(password_1);
 			String hashedP = temp[0];
 			String salt = temp[1];
 			

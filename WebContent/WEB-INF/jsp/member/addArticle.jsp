@@ -32,6 +32,8 @@
 
 			<textarea name="content" placeholder="Your Content"></textarea><br>
 			<input type="submit" value="submit" >
+			
+			<input class="btn btn-primary" type ="button" onclick="history.back()" value="Cancel"></input>
 		</form>
 	</div>
 	
