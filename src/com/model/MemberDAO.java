@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.beans.Member;
+import com.utilities.Password;
 
 public class MemberDAO extends DB{
 
@@ -62,23 +63,29 @@ public class MemberDAO extends DB{
 		return memberList;
 	}
 	
-	public boolean checkMember(String id, String password) throws SQLException {
+	public boolean checkMember(String id, String rawP) throws SQLException {
 		dbConnect();
 		int count = 0;
-		String sql = "Select * from melon.member where Member_ID = ? and Password = ?";
+		String hashedP;
+		String salt;
+		Boolean isCorrect =false;
+		
+		String sql = "Select * from melon.member where Member_ID = ? ";
 		PreparedStatement st = con.prepareStatement(sql);
 
 		st.setString(1, id);
-		st.setString(2, password);
 
 		ResultSet rs = st.executeQuery();
 
 		while (rs.next()) {
 			count = 1;
+			hashedP = rs.getString("Password");
+			salt = rs.getString("Salt");
+			isCorrect = hashedP.equals(Password.getHashedPassword(rawP, salt));
 		}
 
 		dbClose();
-		if (count == 0)
+		if (count == 0 || !isCorrect)
 			return false;
 		return true;
 	}
@@ -109,5 +116,6 @@ public class MemberDAO extends DB{
 		dbClose();
 		return m;
 	}
-
+	
+	
 }
