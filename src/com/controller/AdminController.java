@@ -20,7 +20,8 @@ public class AdminController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String page = request.getParameter("page");
-		if (page == null) {
+		System.out.println("session" + request.getSession().getAttribute("session"));
+		if (request.getSession().getAttribute("session") == null) {
 			request.getRequestDispatcher("/WEB-INF/jsp/admin/login.jsp").forward(request, response);
 			 
 		} else {
@@ -32,7 +33,8 @@ public class AdminController extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String page = request.getParameter("page");
-		
+		if(page == null)
+			page = "index";
 		String id;
 		Product p;
 		
@@ -42,6 +44,7 @@ public class AdminController extends HttpServlet {
 				String password = request.getParameter("password");
 
 				if (username.equals("admin") && password.equals("admin@1234")) {
+					request.getSession().setAttribute("session", "session");
 					request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
 
 				} else {
@@ -65,6 +68,7 @@ public class AdminController extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
 				break;
 			case "index":
+				System.out.println("index");
 				request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
 				break;
 			case "addproduct":
@@ -88,7 +92,7 @@ public class AdminController extends HttpServlet {
 							id = request.getParameter("id");
 					String name = request.getParameter("name");
 					String model = request.getParameter("model");
-					String price = request.getParameter("price");
+					int	   price = Integer.parseInt(request.getParameter("price"));
 					String manuf = request.getParameter("manufacturer");
 					String system = request.getParameter("system");
 					String image = new ProductDAO().getProduct(id).getImage();
@@ -107,7 +111,7 @@ public class AdminController extends HttpServlet {
 				 id = new Date().getTime()+"";//timestamp
 				String name = request.getParameter("name");
 				String model = request.getParameter("model");
-				String price = request.getParameter("price");
+				int    price = Integer.parseInt(request.getParameter("price"));
 				String manuf = request.getParameter("manufacturer");
 				String system = request.getParameter("system");
 				String image = request.getParameter("image");

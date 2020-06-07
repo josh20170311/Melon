@@ -34,7 +34,7 @@ public class ProductDAO extends DB{
 		rs.next();
 		String name 	= rs.getString("Name");
 		String model 	= rs.getString("Model_Number");
-		String price 	= rs.getString("Price");
+		int price 	= rs.getInt("Price");
 		String manufacturer = rs.getString("Manufacturer");
 		String system 	= rs.getString("System");
 		String image 	= rs.getString("Image");
@@ -94,7 +94,7 @@ public class ProductDAO extends DB{
 			String id 		= rs.getString("Product_ID");
 			String name 	= rs.getString("Name");
 			String model 	= rs.getString("Model_Number");
-			String price 	= rs.getString("Price");
+			int price 	= rs.getInt("Price");
 			String manufacturer = rs.getString("Manufacturer");
 			String system 	= rs.getString("System");
 			String image 	= rs.getString("Image");
@@ -120,8 +120,8 @@ public class ProductDAO extends DB{
 			String id 		= rs.getString("Product_ID");
 			String name 	= rs.getString("Name");
 			String model 	= rs.getString("Model_Number");
-			String price 	= rs.getString("Price");
-			 manufacturer = rs.getString("Manufacturer");
+			int    price 	= rs.getInt("Price");
+			manufacturer 	= rs.getString("Manufacturer");
 			String system 	= rs.getString("System");
 			String image 	= rs.getString("Image");
 			String screen 	= rs.getString("Screen_Size");

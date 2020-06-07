@@ -84,15 +84,12 @@ public class Home extends HttpServlet {
 			case "addtocart":
 				String id = request.getParameter("id");
 				String action = request.getParameter("action");
-				Product p = new Product();
-				boolean check = p.check(cartlist, id);
-	
-				if (check)
-					request.setAttribute("message", "Product is 'already' added to Cart");
-				else {
-					cartlist.add(id);
-					request.setAttribute("message", "Product successfully added to Cart");
-				}
+				Boolean check = false;
+				
+				if(cartlist.indexOf(id) != -1)
+					check = true;
+
+				request.setAttribute("message", check?"Product is already added to Cart":"Product is successfully added to Cart");
 	
 				if (action.equals("index"))
 					request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
@@ -100,10 +97,9 @@ public class Home extends HttpServlet {
 			case "price-sort":
 				String price = request.getParameter("sort");
 
-				if (price.equals("low-to-high"))
-					productList = new Product().lowtohigh(productList);
-				else
-					productList = new Product().hightolow(productList);
+				
+				productList = price.equals("low-to-high")?Product.lowtohigh(productList):Product.hightolow(productList);
+
 
 				session.setAttribute("list", productList);
 				request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
@@ -111,7 +107,8 @@ public class Home extends HttpServlet {
 			case "remove":
 				String itemId = request.getParameter("id");
 				
-				cartlist = new Product().remove(cartlist, itemId);
+				if(cartlist.indexOf(itemId) != -1)
+					cartlist.remove(itemId);
 
 				session = request.getSession();
 				session.setAttribute("cartlist", cartlist);
