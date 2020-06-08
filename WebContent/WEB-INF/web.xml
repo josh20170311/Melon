@@ -1,92 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
-  <display-name>Melon</display-name>
-  <welcome-file-list>
-    <welcome-file>Home</welcome-file>
-  </welcome-file-list>
-  <servlet>
-  	<servlet-name>Home</servlet-name>
-  	<servlet-class>com.controller.Home</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>Home</servlet-name>
-  	<url-pattern>/Home</url-pattern>
-  </servlet-mapping>
-  
-    <servlet>
-    <description></description>
-    <display-name>AdminController</display-name>
-    <servlet-name>AdminController</servlet-name>
-    <servlet-class>com.controller.AdminController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AdminController</servlet-name>
-    <url-pattern>/admin</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>LogisticsController</display-name>
-    <servlet-name>LogisticsController</servlet-name>
-    <servlet-class>com.controller.LogisticsController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LogisticsController</servlet-name>
-    <url-pattern>/LogisticsController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ManufacturerController</display-name>
-    <servlet-name>ManufacturerController</servlet-name>
-    <servlet-class>com.controller.ManufacturerController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ManufacturerController</servlet-name>
-    <url-pattern>/ManufacturerController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>Article</display-name>
-    <servlet-name>Article</servlet-name>
-    <servlet-class>com.controller.ArticleController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Article</servlet-name>
-    <url-pattern>/Articles</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>AddArticle</display-name>
-    <servlet-name>AddArticle</servlet-name>
-    <servlet-class>com.controller.AddArticle</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddArticle</servlet-name>
-    <url-pattern>/AddArticle</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>MyArticles</display-name>
-    <servlet-name>MyArticles</servlet-name>
-    <servlet-class>com.controller.MyArticles</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MyArticles</servlet-name>
-    <url-pattern>/MyArticles</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>Product</display-name>
-    <servlet-name>Product</servlet-name>
-    <servlet-class>com.controller.ProductController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Product</servlet-name>
-    <url-pattern>/Product</url-pattern>
-  </servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	version="4.0">
+	<display-name>Melon</display-name>
+	<welcome-file-list>
+		<welcome-file>Home</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>Home</servlet-name>
+		<servlet-class>com.controller.Home</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Home</servlet-name>
+		<url-pattern>/Home</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>AdminController</display-name>
+		<servlet-name>AdminController</servlet-name>
+		<servlet-class>com.controller.AdminController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminController</servlet-name>
+		<url-pattern>/admin</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>LogisticsController</display-name>
+		<servlet-name>LogisticsController</servlet-name>
+		<servlet-class>com.controller.LogisticsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogisticsController</servlet-name>
+		<url-pattern>/LogisticsController</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ManufacturerController</display-name>
+		<servlet-name>ManufacturerController</servlet-name>
+		<servlet-class>com.controller.ManufacturerController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ManufacturerController</servlet-name>
+		<url-pattern>/ManufacturerController</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>Article</display-name>
+		<servlet-name>Article</servlet-name>
+		<servlet-class>com.controller.ArticleController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Article</servlet-name>
+		<url-pattern>/Articles</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>AddArticle</display-name>
+		<servlet-name>AddArticle</servlet-name>
+		<servlet-class>com.controller.AddArticle</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddArticle</servlet-name>
+		<url-pattern>/AddArticle</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>MyArticles</display-name>
+		<servlet-name>MyArticles</servlet-name>
+		<servlet-class>com.controller.MyArticles</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MyArticles</servlet-name>
+		<url-pattern>/MyArticles</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>Product</display-name>
+		<servlet-name>Product</servlet-name>
+		<servlet-class>com.controller.ProductController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Product</servlet-name>
+		<url-pattern>/Product</url-pattern>
+	</servlet-mapping>
+
 	<security-constraint>
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
 		<web-resource-collection>
 			<web-resource-name>Melon</web-resource-name>
 			<url-pattern>/*</url-pattern>
@@ -95,56 +96,38 @@
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
+
 	<security-constraint>
 		<web-resource-collection>
-			<web-resource-name>Admin</web-resource-name>
-			<url-pattern>/admin</url-pattern>
-=======
->>>>>>> Stashed changes
-    <web-resource-collection>
-        <web-resource-name>Melon</web-resource-name>
-        <url-pattern>/*</url-pattern>
-    </web-resource-collection>
-    <user-data-constraint>
-        <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-    </user-data-constraint>
-</security-constraint>
-<<<<<<< Updated upstream
-=======
+			<web-resource-name>admin</web-resource-name>
+			<url-pattern>/admin/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<form-login-config>
 			<form-login-page>/WEB-INF/jsp/admin/login.jsp</form-login-page>
 			<form-error-page>/WEB-INF/jsp/admin/error.jsp</form-error-page>
-		</form-login-config></login-config>
+		</form-login-config>
+	</login-config>
+
 	<security-role>
 		<role-name>admin</role-name>
 	</security-role>
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>admin</web-resource-name>
-			<url-pattern>/admin/*</url-pattern>
->>>>>>> Stashed changes
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>admin</role-name></auth-constraint>
-	</security-constraint>
-<<<<<<< Updated upstream
-	<login-config>
-		<auth-method>BASIC</auth-method></login-config>
-	<security-role>
-		<role-name>admin</role-name>
-	</security-role>
-=======
+
 	<resource-ref>
 		<res-ref-name>jdbc/melon</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
 		<res-sharing-scope>Shareable</res-sharing-scope>
 	</resource-ref>
+
+
 	<listener>
 		<listener-class>com.utilities.OnlineUsers</listener-class>
 	</listener>
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 </web-app>

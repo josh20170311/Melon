@@ -19,39 +19,24 @@ public class AdminController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-<<<<<<< Updated upstream
-		String page = request.getParameter("page");
-		if (page == null) {
-			request.getRequestDispatcher("/WEB-INF/jsp/admin/login.jsp").forward(request, response);
-			 
-		} else {
-			doPost(request, response);
-		}
-=======
+
 
 		doPost(request, response);
 		
->>>>>>> Stashed changes
+
 	} 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String page = request.getParameter("page");
-<<<<<<< Updated upstream
-		
-=======
-<<<<<<< Updated upstream
-		if(page == null)
-			page = "index";
-=======
+
+
 		if (page == null) {
 			page = "index";
 		}
 		
-		
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+
 		String id;
 		Product p;
 		
