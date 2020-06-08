@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.beans.Member;
+import com.beans.Product;
 import com.utilities.Password;
 
 public class MemberDAO extends DB{
@@ -117,5 +118,36 @@ public class MemberDAO extends DB{
 		return m;
 	}
 	
+	public void verify(String email,String token) {
+		try {
+			dbConnect();
+			String sql = "update melon.member set Verified=true where Email = ? and Password = ?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1,email);
+			st.setString(2,token);
+			st.executeUpdate();
+			
+			dbClose();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void resetPassword(String id,String hashedPassword,String salt) {
+		try {
+			
+			dbConnect();
+			String sql = "update melon.member set Password=?, Salt=? where Member_ID=?;";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, hashedPassword);
+			st.setString(2,	salt);
+			st.setString(3, id);
+			st.executeUpdate();
+			System.out.println(st);
+			dbClose();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

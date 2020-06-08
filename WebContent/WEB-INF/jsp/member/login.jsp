@@ -47,7 +47,8 @@
 	 		<button type="submit" name="login" class="signup-btn">Log in</button>
 	 	</div>
 	 	<p>
-	 		New Friend? <a href="Home?page=sign-up" style="color:#F24638;">Create Account</a>
+	 		New Friend? <a href="Home?page=sign-up" style="color:#F24638;">Create Account</a><br>
+	 		Forgot Password? <a href="Forget" style="color:#F24638;">Reset Password</a>
 	 	</p>
 	 </form>
 	<br><br><br>

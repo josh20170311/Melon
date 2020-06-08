@@ -15,6 +15,17 @@ public class Member {
 
 	
 	
+	public Member() {
+		this.id = "";
+		this.name = "";
+		this.email = "";
+		this.gender = "";
+		this.password = "";
+		this.address = "";
+		this.phone = "";
+		this.salt = "";
+	}
+
 	public String getSalt() {
 		return salt;
 	}

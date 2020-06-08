@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.beans.*;
 import com.model.*;
-import com.utilities.Password;
+import com.utilities.*;
 
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -35,7 +35,15 @@ public class Home extends HttpServlet {
 		String page = request.getParameter("page");
 		System.out.println();
 		System.out.println("in Home");
+
+		////test
+		//GmailService g = (GmailService) getServletContext().getAttribute("emailService");
+		//Member member = new Member();
+		//member.setEmail("josh2013.880922@gmail.com");
+		//member.setPassword("12345678");
+		//g.validationLink(member);
 		
+		////
 		
 		
 		String catalog = request.getParameter("catalog");
@@ -180,7 +188,10 @@ public class Home extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
+			
+			
+			((GmailService)getServletContext().getAttribute("emailService")).validationLink(member);
+			
 			request.setAttribute("id", id);//要傳給login 預先填入帳號
 			request.setAttribute("msg", "Account created successfully, Please Login!");
 			request.getRequestDispatcher("WEB-INF/jsp/member/login.jsp").forward(request, response);
