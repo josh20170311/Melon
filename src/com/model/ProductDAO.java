@@ -149,7 +149,8 @@ public class ProductDAO extends DB{
 			}
 	
 			dbClose();
-			System.out.println(list);
+			//System.out.println("\nin getManufList");
+			//System.out.println(list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

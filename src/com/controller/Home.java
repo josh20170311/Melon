@@ -32,6 +32,12 @@ public class Home extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
+		String page = request.getParameter("page");
+		System.out.println();
+		System.out.println("in Home");
+		
+		
+		
 		String catalog = request.getParameter("catalog");
 		try { 
 			if(catalog == null ||catalog.equals("all"))
@@ -46,22 +52,20 @@ public class Home extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		session = request.getSession();
+
 		session.setAttribute("cartlist", cartlist);
 		session.setAttribute("list", productList);
 		session.setAttribute("manuflist", manufList);
 
 		
-		String page = request.getParameter("page");
-		System.out.println();
-		System.out.println("in Home");
-		System.out.println("page : "+page);
+		
 		if(page == null || page.equals("index")){
 			request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
+
 			return;
 		}
-		
+		System.out.println("page : "+page);
 		switch(page) {
 			case "login":
 				request.getRequestDispatcher("WEB-INF/jsp/member/login.jsp").forward(request, response);
@@ -140,9 +144,6 @@ public class Home extends HttpServlet {
 			case "login-form":
 				doLoginForm(request, response);
 				break;
-			
-			
-		
 		}
 	}
 
