@@ -86,8 +86,10 @@ public class MemberDAO extends DB{
 		}
 
 		dbClose();
-		if (count == 0 || !isCorrect)
+		if (count == 0 || !isCorrect ) {
+			
 			return false;
+		}
 		return true;
 	}
 
@@ -148,6 +150,54 @@ public class MemberDAO extends DB{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void countError(String id) {
+		String querySql = "select Error from melon.member where Member_ID = ?";
+		String updateSql = "update melon.member set Error = Error +1 where Member_ID = ?";
+		String frozeSql = "update melon.member set Froze = true where Member_ID = ?";
+		
+		try {
+			dbConnect();
+			PreparedStatement st = con.prepareStatement(updateSql);
+			st.setString(1, id);
+			st.executeUpdate();
+			
+			
+			PreparedStatement st2 = con.prepareStatement(querySql);
+			st2.setString(1, id);
+			ResultSet rs = st2.executeQuery();
+			rs.next();
+			int count = rs.getInt(1);
+			
+			if(count >= 3) {
+				PreparedStatement st3 = con.prepareStatement(frozeSql);
+				st3.setString(1, id);
+				st3.executeUpdate();
+			}
+			
+			dbClose();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	public Boolean isFrozed(String id) {
+		String sql = "select Froze from melon.member where Member_ID = ?";
+		Boolean output = false;
+		try {
+			dbConnect();
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, id);
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			output =  rs.getBoolean(1);
+			dbClose();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return output;
 	}
 	
 }

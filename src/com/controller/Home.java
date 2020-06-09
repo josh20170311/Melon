@@ -216,6 +216,12 @@ public class Home extends HttpServlet {
 
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
+		
+		if(new MemberDAO().isFrozed(id)) {
+			request.setAttribute("msg", "Your Account has been Frozed");
+			request.getRequestDispatcher("WEB-INF/jsp/member/login.jsp").forward(request, response);
+			return;
+		}
 
 		MemberDAO memberDAO = new MemberDAO();
 
@@ -241,6 +247,7 @@ public class Home extends HttpServlet {
 			session.setAttribute("memberId", 		id);
 			request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
 		} else {//
+			new MemberDAO().countError(id);
 			request.setAttribute("msg", "Invalid Crediantials");
 			request.setAttribute("id", id);
 			request.getRequestDispatcher("WEB-INF/jsp/member/login.jsp").forward(request, response);
