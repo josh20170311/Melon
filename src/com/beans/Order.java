@@ -1,10 +1,13 @@
 package com.beans;
 
+import java.util.Date;
+
 public class Order {
 	private String deliId;
 	private String memberId;
 	private String id;
 	private int totalPrice;
+	private Date date;
 	public String getDeliId() {
 		return deliId;
 	}
@@ -28,6 +31,13 @@ public class Order {
 	}
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	@Override
 	public String toString() {

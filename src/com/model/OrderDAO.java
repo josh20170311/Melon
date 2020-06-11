@@ -1,6 +1,7 @@
 package com.model;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.*;
 import com.beans.*;
 import com.model.*;
@@ -65,12 +66,13 @@ public class OrderDAO extends DB{
 			st.execute();
 			
 			//Order
-			String sql2 = "insert into melon.order value(?, ?, ?, ?);";
+			String sql2 = "insert into melon.order value(?, ?, ?, ?, ?);";
 			PreparedStatement st2 = con.prepareStatement(sql2);
 			st2.setString(1, orderId);
 			st2.setInt(2, total);
 			st2.setString(3, memberId);
 			st2.setString(4, deliveryId);
+			st2.setObject(5, date);
 			st2.execute();
 			
 			//Order_Detail
@@ -89,4 +91,30 @@ public class OrderDAO extends DB{
 		
 	}
 
+	public void getOrders(String memberId) {
+		ArrayList<Order> orderlist = new ArrayList<Order>();
+		try {
+			dbConnect();
+			String sql = "select * from melon.order where Member_ID = ?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, memberId);
+			ResultSet rs =st.executeQuery();
+			
+			Order o;
+			while(rs.next()){
+				o = new Order();
+				o.setId(rs.getString("Order_ID"));
+				o.setDeliId(rs.getString("Delivery_ID"));
+				o.setMemberId(memberId);
+				o.setTotalPrice(rs.getInt("Total_Price"));
+				o.setDate(rs.getDate("Date"));
+				orderlist.add(o);
+			}
+			
+			
+			dbClose();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
