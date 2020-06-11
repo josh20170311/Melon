@@ -85,29 +85,33 @@ public class ProductDAO extends DB{
 		st.executeUpdate();
 		dbClose();
 	}
-	public ArrayList<Product> fetchProduct() throws SQLException {
-		dbConnect();
-		String sql = "Select * from melon.product";
-		PreparedStatement st = con.prepareStatement(sql);
-		ResultSet rs = st.executeQuery();
-		while (rs.next()) {
-			String id 		= rs.getString("Product_ID");
-			String name 	= rs.getString("Name");
-			String model 	= rs.getString("Model_Number");
-			int price 	= rs.getInt("Price");
-			String manufacturer = rs.getString("Manufacturer");
-			String system 	= rs.getString("System");
-			String image 	= rs.getString("Image");
-			String screen 	= rs.getString("Screen_Size");
-			String storage 	= rs.getString("Storage");
+	public ArrayList<Product> fetchProduct() {
+		try {
+			dbConnect();
+			String sql = "Select * from melon.product";
+			PreparedStatement st = con.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				String id 		= rs.getString("Product_ID");
+				String name 	= rs.getString("Name");
+				String model 	= rs.getString("Model_Number");
+				int price 	= rs.getInt("Price");
+				String manufacturer = rs.getString("Manufacturer");
+				String system 	= rs.getString("System");
+				String image 	= rs.getString("Image");
+				String screen 	= rs.getString("Screen_Size");
+				String storage 	= rs.getString("Storage");
 
-			Product p = new Product(id,name,model,price,manufacturer,system,image,screen,storage);
-			list.add(p);
-			p = null;
+				Product p = new Product(id,name,model,price,manufacturer,system,image,screen,storage);
+				list.add(p);
+				p = null;
 
+			}
+
+			dbClose();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
-		dbClose();
 		return list;
 	}
 	public ArrayList<Product> fetchProduct(String manufacturer) throws SQLException {

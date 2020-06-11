@@ -24,6 +24,7 @@ public class Home extends HttpServlet {
 	ArrayList<Product> productList = new ArrayList<>();
 	ArrayList<String> manufList = new ArrayList<>();
 	ArrayList<String> cartlist = new ArrayList<>();
+	ArrayList<String> amountlist = new ArrayList<>();
 	ArrayList<Member> memberList = new ArrayList<>();
 
 	HttpSession session; 
@@ -49,6 +50,7 @@ public class Home extends HttpServlet {
 
 		session = request.getSession();
 		session.setAttribute("cartlist", cartlist);
+		session.setAttribute("amountlist", amountlist);
 		session.setAttribute("list", productList);
 		session.setAttribute("manuflist", manufList);
 
@@ -74,7 +76,9 @@ public class Home extends HttpServlet {
 				session.invalidate();
 				session = request.getSession();
 				cartlist.clear();
+				amountlist.clear();
 				session.setAttribute("cartlist", cartlist);
+				session.setAttribute("amountlist", amountlist);
 				session.setAttribute("list", productList);
 				request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
 				break;
@@ -86,13 +90,30 @@ public class Home extends HttpServlet {
 				String action = request.getParameter("action");
 				Boolean check = false;
 				
-				if(cartlist.indexOf(id) != -1)
+				if(cartlist.indexOf(id) == -1) {
+					cartlist.add(id);
+					amountlist.add("1");
+				}else {
 					check = true;
+				}
+				
 
 				request.setAttribute("message", check?"Product is already added to Cart":"Product is successfully added to Cart");
 	
 				if (action.equals("index"))
 					request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
+				break;
+			case "remove":
+				String itemId = request.getParameter("id");
+				
+				int index = cartlist.indexOf(itemId);
+				if(index != -1) {
+					cartlist.remove(index);
+					amountlist.remove(index);
+				}
+
+
+				request.getRequestDispatcher("WEB-INF/jsp/member/cart.jsp").forward(request, response);
 				break;
 			case "price-sort":
 				String price = request.getParameter("sort");
@@ -104,22 +125,7 @@ public class Home extends HttpServlet {
 				session.setAttribute("list", productList);
 				request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
 				break;
-			case "remove":
-				String itemId = request.getParameter("id");
-				
-				if(cartlist.indexOf(itemId) != -1)
-					cartlist.remove(itemId);
-
-				session = request.getSession();
-				session.setAttribute("cartlist", cartlist);
-				request.getRequestDispatcher("WEB-INF/jsp/member/cart.jsp").forward(request, response);
-				break;
-			case "success":
-				session = request.getSession();
-				cartlist.clear();
-				session.setAttribute("cartlist", cartlist );
-				request.getRequestDispatcher("WEB-INF/jsp/member/success.jsp").forward(request, response);
-				break;
+			
 		}
 
 	}
@@ -137,7 +143,15 @@ public class Home extends HttpServlet {
 			case "login-form":
 				doLoginForm(request, response);
 				break;
-			
+			case "checkout":
+				System.out.println(cartlist);
+				System.out.println(amountlist);
+				for(int i = 0 ; i < cartlist.size() ; i++) {
+					amountlist.set(i, request.getParameter(cartlist.get(i)));
+				}
+				System.out.println(amountlist);
+				request.getRequestDispatcher("WEB-INF/jsp/member/success.jsp").forward(request, response);
+				break;
 			
 		
 		}
@@ -224,6 +238,7 @@ public class Home extends HttpServlet {
 			session.setAttribute("email", 	m.getEmail());
 			session.setAttribute("name", 	m.getName());
 			session.setAttribute("memberId", 		id);
+			session.setAttribute("member", m);
 			request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
 		} else {//
 			request.setAttribute("msg", "Invalid Crediantials");

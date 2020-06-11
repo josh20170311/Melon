@@ -17,7 +17,7 @@
 					</c:when>
 					<c:when test="${session != null}">
 						<li><a href="Home?page=logout" 	>Logout</a></li>
-						<li><a href="#"					>My Account(<c:out value="${username }"></c:out>)</a></li>
+						<li><a href="MyAccount"					>My Account(<c:out value="${username }"></c:out>)</a></li>
 						<li><a href=MyArticles>My Articles</a></li>
 					</c:when>
 				</c:choose>

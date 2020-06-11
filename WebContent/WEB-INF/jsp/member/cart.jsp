@@ -34,14 +34,16 @@
 		</c:otherwise>
 	
 	</c:choose>
-	<table>
+	<form method="POST" action="Home" class="nothing">
+	<input type="hidden" name="page" value="checkout">
+	<table style="table-layout: fixed;width: 100%;">
 		<tr>
-			<th>Item Name</th>
-			<th>Price</th>
-			<th>Manufacturer</th>
-			<th>Remove Item</th>
+			<th style="width: 10px;">Item Name</th>
+			<th style="width: 10px;">Price</th>
+			<th style="width: 10px;">Manufacturer</th>
+			<th style="width: 10px;">Amount</th>
+			<th style="width: 10px;">Remove Item</th>
 		</tr>
-	</table>
 	
 		<c:set var="total" value="0"></c:set>
 		<c:forEach items="${cartlist }" var="i">
@@ -50,21 +52,23 @@
 				
 				<c:set var="total" value="${total + Product.getPrice() }"></c:set>
 				
-			<table style="table-layout: fixed;width: 100%;">
+			
 				<tr>
-					<td style="width: 100px;"><img src="${Product.getImage()}" height="100" width="150" >  (<c:out value="${Product.getName()}"/>)</td>
-					<td style="width: 50px;"><c:out value="${Product.getPrice()}"/></td>
-					<td style="width: 100px;"><c:out value="${Product.getManufacturer()}"/></td>
-					<td style="width: 100px;"><a href="Home?page=remove&id=<c:out value="${Product.getId()}"/>"><span class="btn btn-danger">X</span></a></td>
+					<td style="width: 10px;"><img src="${Product.getImage()}" height="100"><br>  (<c:out value="${Product.getName()}"/>)</td>
+					<td style="width: 10px;" ><c:out value="${Product.getPrice()}"/></td>
+					<td style="width: 10px;"><c:out value="${Product.getManufacturer()}"/></td>
+					<td style="width: 10px;" ><input type="number" min="1" max="100" name="${i}" value="${amountlist.get(cartlist.indexOf(i)) }"/></td>
+					<td style="width: 10px;"><a href="Home?page=remove&id=<c:out value="${Product.getId()}"/>"><span class="btn btn-danger">X</span></a></td>
 				</tr>
-			</table>
 				</c:if>
 			</c:forEach>
 		</c:forEach>
+		</table>
 	
 	<h4 style="margin-top: 40px;margin-bottom: 40px;">Order Total: $ (<c:out value="${ total}"></c:out>)</h4>
 	
-	<a href="Home?page=success"><input type="submit" value="Proceed to Checkout" class="btn btn-success" style="width:100%;padding:8px;font-size:16px;"></a><br>
+	<input type="submit" value="Proceed to Checkout" class="btn btn-success" style="width:100%;padding:8px;font-size:16px;"><br>
+	</form>
 	<a href="Home?page=index"><input type="button" value="Continue Shopping" class="btn btn-warning" style="width:100%;padding:8px;font-size:16px;"></a>
 	
 	

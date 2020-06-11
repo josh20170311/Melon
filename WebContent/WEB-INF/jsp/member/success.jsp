@@ -1,6 +1,6 @@
-<%@page import="com.beans.Product"%>
+<%@page import="com.beans.*"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="javax.swing.JOptionPane"%>
+<%@page import="com.model.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -27,6 +27,7 @@
 		<c:when test="${session == null}">
 				<%
 				//JOptionPane.showMessageDialog(null, "Please Login first", "Info", JOptionPane.INFORMATION_MESSAGE);
+				request.setAttribute("message", "Please Login first");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 				%>
 		</c:when>
@@ -49,6 +50,8 @@
 					<br><br>
 					<a href="Home"><input type="button" value="Continue Shopping" class="btn btn-warning" style="width:100%;padding:8px;font-size:16px;"></a>
 				</div>
+				
+				<% new OrderDAO().sendOrder((String)session.getAttribute("memberId"), (ArrayList<String>)session.getAttribute("cartlist"), (ArrayList<String>)session.getAttribute("amountlist")); %>
 			
 		</c:when>
 	

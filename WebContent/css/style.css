@@ -30,6 +30,9 @@ form, .content {
   border-radius: 0px 0px 10px 10px;
   font-size:16px;
 }
+.nothing{
+	width:100%;
+}
 
 .signup-group {
   margin: 10px 0px 10px 0px;
@@ -140,15 +143,17 @@ a:hover {
 
 /* cart */
 table th{
-	text-align: left;
+	text-align: center;
 	background-color: #3a6070;
+	border:1px solid black;
 	color: white;
-	padding: 4px 30px 4px 8px;
+	padding: 4px 1px 4px 1px;
 }
 
 table td{
+	text-align: center;
 	border: 1px solid black;
-	padding: 4px 8px;
+	padding: 1px 1px;
 }
 
 table {
