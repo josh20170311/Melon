@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
+import java.util.*;
+
 import com.beans.*;
 import com.model.*;
 import com.utilities.Password;
@@ -31,11 +34,19 @@ public class Home extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		request.setCharacterEncoding("UTF-8");
+		
+		//TEST
+			Date date = new Date();
+		//
+		
+		
+		
+		
+		
 		String catalog = request.getParameter("catalog");
 		try { 
-			if(catalog == null ||catalog.equals("all"))
+			if(catalog == null ||catalog.equals("all") || catalog.equals(""))
 				productList = new ProductDAO().fetchProduct();
 			else {
 				productList = new ProductDAO().fetchProduct(catalog);
@@ -80,7 +91,7 @@ public class Home extends HttpServlet {
 				session.setAttribute("cartlist", cartlist);
 				session.setAttribute("amountlist", amountlist);
 				session.setAttribute("list", productList);
-				request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
+				request.getRequestDispatcher("Home?page=index").forward(request, response);
 				break;
 			case "showcart":
 				request.getRequestDispatcher("WEB-INF/jsp/member/cart.jsp").forward(request, response);
@@ -117,13 +128,18 @@ public class Home extends HttpServlet {
 				break;
 			case "price-sort":
 				String price = request.getParameter("sort");
-
+				System.out.println("sort: "+price);
+				productList = (ArrayList<Product>)session.getAttribute("list");
+				System.out.println(productList);
 				
 				productList = price.equals("low-to-high")?Product.lowtohigh(productList):Product.hightolow(productList);
-
+				System.out.println(productList);
 
 				session.setAttribute("list", productList);
 				request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
+				break;
+			case "cash-on-delivery":
+				request.getRequestDispatcher("WEB-INF/jsp/member/success.jsp").forward(request, response);	
 				break;
 			
 		}
@@ -144,14 +160,30 @@ public class Home extends HttpServlet {
 				doLoginForm(request, response);
 				break;
 			case "checkout":
-				System.out.println(cartlist);
-				System.out.println(amountlist);
-				for(int i = 0 ; i < cartlist.size() ; i++) {
-					amountlist.set(i, request.getParameter(cartlist.get(i)));
+				if(cartlist.size() == 0) {
+					request.setAttribute("message", "Your Cart is Empty");
+					request.getRequestDispatcher("WEB-INF/jsp/member/index.jsp").forward(request, response);
+					break;
 				}
-				System.out.println(amountlist);
-				request.getRequestDispatcher("WEB-INF/jsp/member/success.jsp").forward(request, response);
+				if(request.getSession().getAttribute("member") == null) {
+					request.setAttribute("message", "Please Login first");
+					request.getRequestDispatcher("WEB-INF/jsp/member/login.jsp").forward(request, response);
+					break;
+				}
+					
+				int sum = 0;
+				try {
+					for(int i = 0 ; i < cartlist.size() ; i++) {
+						amountlist.set(i, request.getParameter(cartlist.get(i)));
+						sum += Integer.parseInt(amountlist.get(i)) * (new ProductDAO().getProduct(cartlist.get(i))).getPrice();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				request.setAttribute("sum", sum);
+				request.getRequestDispatcher("WEB-INF/jsp/member/orderCheck.jsp").forward(request, response);
 				break;
+			
 			
 		
 		}

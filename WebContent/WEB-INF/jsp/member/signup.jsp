@@ -49,7 +49,11 @@
 	 	
 	 	<div class="signup-group">
 	 		<label>Gender</label>
-	 		<input type="text" name="gender" placeholder="Your Gender (male/female)" value="<c:out value="${gender }"></c:out>" required>
+	 		<!-- input type="text" name="gender" placeholder="Your Gender (male/female)" value="<c:out value="${gender }"></c:out>" required-->
+	 		<select name="gender" >
+	 			<option value="male">Male</option>
+	 			<option value="female">Female</option>
+	 		</select>
 	 	</div>
 	 	
 	 	

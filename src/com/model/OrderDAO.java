@@ -6,13 +6,14 @@ import java.util.*;
 import com.beans.*;
 import com.model.*;
 
+
 public class OrderDAO extends DB{
 	public void sendOrder(String memberId, ArrayList<String> cartList, ArrayList<String> amountList) {
 		int total = 0;
 		Date date = new Date();
-		Long timestamp = date.getTime();
-		String deliveryId = "D"+timestamp;
-		String orderId = "O"+timestamp;
+		//Long timestamp = date.getTime();
+		String deliveryId = String.format(Locale.US,"%ty%tm%td%s", date,date,date,getSerialNumber());
+		String orderId = String.format(Locale.US,"%tb%ty%tm%td%s", date,date,date,date,getSerialNumber());
 		final String LOGISTICS_PROVIDER_ID ="LP00000001";
 		ArrayList<Product> orderedProducts = new ArrayList<Product>();
 		ArrayList<String> detailSql = new ArrayList<String>();
@@ -91,7 +92,7 @@ public class OrderDAO extends DB{
 		
 	}
 
-	public void getOrders(String memberId) {
+	public ArrayList<Order> getOrders(String memberId) {
 		ArrayList<Order> orderlist = new ArrayList<Order>();
 		try {
 			dbConnect();
@@ -116,5 +117,71 @@ public class OrderDAO extends DB{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return orderlist;
+	}
+	private String getSerialNumber() {
+		String output = "";
+		String sql = "SELECT count(Order_ID) FROM melon.order where Date = curdate();";
+		try {
+			dbConnect();
+			PreparedStatement st = con.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			int count =  rs.getInt(1);
+			output = String.format("%06d", count+1);
+			
+			dbClose();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return output;
+	}
+	public ArrayList<OrderDetail> getDetails(String id){
+		ArrayList<OrderDetail> detailList = new ArrayList<OrderDetail>();
+		try {
+			dbConnect();
+			
+			String sql="select * from Order_Detail where Order_ID = ?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1,id);
+			ResultSet rs = st.executeQuery();
+			OrderDetail od;
+			while(rs.next()) {
+				od = new OrderDetail();
+				od.setId(rs.getString("Detail_ID"));
+				od.setOrderId(rs.getString("Order_ID"));
+				od.setAmount(rs.getInt("Amount"));
+				od.setPrice(rs.getInt("Price"));
+				od.setProductId(rs.getString("Product_ID"));
+				detailList.add(od);
+			}
+			
+			dbClose();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return detailList;
+	}
+	public Order getOrder(String orderid) {
+		Order o = new Order();
+		try {
+			String sql="select * from melon.order where Order_ID = ?";
+			dbConnect();
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, orderid);
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			o.setId(rs.getString("Order_ID"));
+			o.setDeliId(rs.getString("Delivery_ID"));
+			o.setMemberId(rs.getString("Member_ID"));
+			o.setTotalPrice(rs.getInt("Total_Price"));
+			o.setDate((Date)rs.getObject("Date"));
+			dbClose();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return o;
 	}
 }

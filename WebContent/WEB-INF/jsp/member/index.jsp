@@ -59,7 +59,7 @@
 					<form action="Home" method="get" 
 										style="border: none;margin:0px;padding: 0px;margin-bottom: 20px;">
 							<input type="hidden" name="page" value="price-sort">
-							<input type="hidden" name="catalog" value=<c:out value="${catalog }"></c:out>>
+							<input type="hidden" name="catalog" value="<c:out value="${param.catalog}"></c:out>">
 							<select name="sort">
 									<option value="low-to-high">Low to high</option>
 									<option value="high-to-high">high to low</option>

@@ -41,6 +41,9 @@ public class Order {
 	}
 	@Override
 	public String toString() {
-		return "Order [deliId=" + deliId + ", memberId=" + memberId + ", id=" + id + ", totalPrice=" + totalPrice + "]";
+		return "Order [deliId=" + deliId + ", memberId=" + memberId + ", id=" + id + ", totalPrice=" + totalPrice
+				+ ", date=" + date + "]";
 	}
+
+	
 }

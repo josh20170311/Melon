@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `melon` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `melon`;
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
 -- Host: localhost    Database: melon
@@ -83,7 +85,7 @@ CREATE TABLE `article` (
   `Member_ID` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Title` tinytext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Content` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `Product_ID` varchar(50) COLLATE utf8_bin NOT NULL,
+  `Product_ID` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Audited` tinyint(1) NOT NULL DEFAULT '0',
   `Upload_Time` datetime NOT NULL,
   PRIMARY KEY (`Article_ID`),
@@ -171,7 +173,7 @@ CREATE TABLE `delivery_detail` (
   `Product_ID` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Price` int(11) NOT NULL,
   `Amount` int(11) NOT NULL,
-  PRIMARY KEY (`Detail_ID`),
+  PRIMARY KEY (`Detail_ID`,`Delivery_ID`),
   KEY `Delivery_Detail_FK` (`Delivery_ID`),
   KEY `Delivery_Detail_FK1` (`Product_ID`),
   CONSTRAINT `Delivery_Detail_FK` FOREIGN KEY (`Delivery_ID`) REFERENCES `delivery` (`Delivery_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -227,9 +229,9 @@ CREATE TABLE `member` (
   `Gender` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Address` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Phone` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `Password` varchar(64) COLLATE utf8_bin NOT NULL,
-  `Email` varchar(100) COLLATE utf8_bin NOT NULL,
-  `Salt` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `Password` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `Email` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `Salt` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`Member_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -256,6 +258,7 @@ CREATE TABLE `order` (
   `Total_Price` int(11) NOT NULL,
   `Member_ID` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Delivery_ID` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `Date` date NOT NULL,
   PRIMARY KEY (`Order_ID`),
   KEY `Order_FK` (`Member_ID`),
   KEY `Order_FK1` (`Delivery_ID`),
@@ -286,7 +289,7 @@ CREATE TABLE `order_detail` (
   `Product_ID` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Price` int(11) NOT NULL,
   `Amount` int(11) NOT NULL,
-  PRIMARY KEY (`Detail_ID`),
+  PRIMARY KEY (`Detail_ID`,`Order_ID`),
   KEY `Order_Detail_FK` (`Order_ID`),
   KEY `Order_Detail_FK1` (`Product_ID`),
   CONSTRAINT `Order_Detail_FK` FOREIGN KEY (`Order_ID`) REFERENCES `order` (`Order_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -349,7 +352,7 @@ CREATE TABLE `packing_detail` (
   `Product_ID` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Price` int(11) NOT NULL,
   `Amount` int(11) NOT NULL,
-  PRIMARY KEY (`Detail_ID`),
+  PRIMARY KEY (`Detail_ID`,`Packing_ID`),
   KEY `Packing_Detail_FK` (`Packing_ID`),
   KEY `Packing_Detail_FK1` (`Product_ID`),
   CONSTRAINT `Packing_Detail_FK` FOREIGN KEY (`Packing_ID`) REFERENCES `packing` (`Packing_ID`),
@@ -407,7 +410,7 @@ CREATE TABLE `product` (
   `Model_Number` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Price` int(11) NOT NULL,
   `Manufacturer` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `System` varchar(50) COLLATE utf8_bin NOT NULL,
+  `System` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Image` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Screen_Size` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Storage` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
@@ -438,7 +441,7 @@ CREATE TABLE `product_detail` (
   `Spec_Name` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Spec_Para` float NOT NULL,
   `Unit` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`Detail_ID`),
+  PRIMARY KEY (`Detail_ID`,`Product_ID`),
   KEY `Product_ID` (`Product_ID`),
   CONSTRAINT `Product_Detail_FK` FOREIGN KEY (`Product_ID`) REFERENCES `product` (`Product_ID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -488,4 +491,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-08  9:16:01
+-- Dump completed on 2020-06-13 12:41:04

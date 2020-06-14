@@ -65,7 +65,7 @@
 		</c:forEach>
 		</table>
 	
-	<h4 style="margin-top: 40px;margin-bottom: 40px;">Order Total: $ (<c:out value="${ total}"></c:out>)</h4>
+	<!-- h4 style="margin-top: 40px;margin-bottom: 40px;">Order Total: $ (<c:out value="${ total}"></c:out>)</h4-->
 	
 	<input type="submit" value="Proceed to Checkout" class="btn btn-success" style="width:100%;padding:8px;font-size:16px;"><br>
 	</form>
