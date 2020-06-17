@@ -7,7 +7,7 @@
 		</h1>
 		<nav>
 			<ul>
-				<li><input type="text"  name="search"  placeHolder="Search"/></li>
+				<!-- li><input type="text"  name="search"  placeHolder="Search"/></li-->
 				<li><a href="Home"			>Home</a></li>
 				<li><a href="Articles"		>Articles</a></li>
 				<c:choose>

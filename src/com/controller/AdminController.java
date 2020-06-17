@@ -21,7 +21,7 @@ public class AdminController extends HttpServlet {
 			throws ServletException, IOException {
 		String page = request.getParameter("page");
 		System.out.println("session" + request.getSession().getAttribute("session"));
-		if (request.getSession().getAttribute("session") == null) {
+		if (request.getSession().getAttribute("admin") == null) {
 			request.getRequestDispatcher("/WEB-INF/jsp/admin/login.jsp").forward(request, response);
 			 
 		} else {
@@ -44,7 +44,7 @@ public class AdminController extends HttpServlet {
 				String password = request.getParameter("password");
 
 				if (username.equals("admin") && password.equals("admin@1234")) {
-					request.getSession().setAttribute("session", "session");
+					request.getSession().setAttribute("admin", "admin");
 					request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
 
 				} else {
@@ -69,7 +69,9 @@ public class AdminController extends HttpServlet {
 				break;
 			case "index":
 				System.out.println("index");
-				request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
+				//request.getSession().invalidate();
+				request.getRequestDispatcher("WEB-INF/jsp/admin/index.jsp").forward(request, response);
+				//response.sendRedirect("Home");
 				break;
 			case "addproduct":
 				request.getRequestDispatcher("/WEB-INF/jsp/admin/addProduct.jsp").forward(request, response);

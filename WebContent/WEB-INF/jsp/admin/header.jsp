@@ -6,7 +6,7 @@
 		</h1>
 		<nav>
 			<ul>
-				<li><a href="admin?page=index">Home</a></li>
+				<li><a href="admin">admin</a></li>
 				<li><a href="admin?page=addproduct">Add Product</a></li>
 				<li><a href="admin?page=articles">Articles</a></li>
 			</ul>

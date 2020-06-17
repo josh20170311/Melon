@@ -6,16 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Login page</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<link 
-	rel="stylesheet" 
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
-	crossorigin="anonymous"> 
 <script type="text/javascript" src="js/utils.js"></script>
 	
 </head>
 <body>
+	
+	<%@ include file="header.jsp"%>
 	<script>
 			alertMessage("${message}");
 	</script>
@@ -23,10 +22,7 @@
 	<c:forEach items="${cartlist }" var="i">
 		<c:set var="x" value="${x+1 }"></c:set>
 	</c:forEach>
-	
-	<%--導覽bar_開始 --%>
-	<%@ include file="header.jsp"%>
-	<%--導覽bar_結束 --%>
+
 	
 	<div class="signup-header">
 	 	<h2>Login to Melon</h2>

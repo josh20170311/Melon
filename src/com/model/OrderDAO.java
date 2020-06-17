@@ -2,7 +2,11 @@ package com.model;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.*;
+//import java.util.*;
+import java.util.ArrayList;
+import java.util.Locale;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
 import com.beans.*;
 import com.model.*;
 
@@ -10,7 +14,8 @@ import com.model.*;
 public class OrderDAO extends DB{
 	public void sendOrder(String memberId, ArrayList<String> cartList, ArrayList<String> amountList) {
 		int total = 0;
-		Date date = new Date();
+		Date date = new Date(new java.util.Date().getTime());
+		System.out.println(date);
 		//Long timestamp = date.getTime();
 		String deliveryId = String.format(Locale.US,"%ty%tm%td%s", date,date,date,getSerialNumber());
 		String orderId = String.format(Locale.US,"%tb%ty%tm%td%s", date,date,date,date,getSerialNumber());
@@ -56,11 +61,16 @@ public class OrderDAO extends DB{
 		try {
 			dbConnect();
 			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			//進行轉換
+			String dateString = sdf.format(date);
+			System.out.println(dateString);
+			
 			//Delivery
 			String sql = "insert into melon.delivery value(?, ?, ?, ?, ?);";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, deliveryId);
-			st.setObject(2, date);
+			st.setObject(2, dateString);//寫入mysql時會出現時區轉換問題導致日期錯誤，所以改成dateString
 			st.setInt(3, total);
 			st.setString(4, "order checking");
 			st.setString(5, LOGISTICS_PROVIDER_ID);
@@ -73,7 +83,7 @@ public class OrderDAO extends DB{
 			st2.setInt(2, total);
 			st2.setString(3, memberId);
 			st2.setString(4, deliveryId);
-			st2.setObject(5, date);
+			st2.setObject(5, dateString);
 			st2.execute();
 			
 			//Order_Detail

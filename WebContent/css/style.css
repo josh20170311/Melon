@@ -1,5 +1,21 @@
 @charset "ISO-8859-1";
 
+
+a{
+	text-align: center;
+	text-decoration: none;
+	color:black;
+	font-size: 1.2vw;
+}
+a.nothing{
+	
+}
+
+a:hover {
+	color: #F0c330;
+	transition: 0.5s;
+}
+
 /* login-signup */
 
 * {
@@ -119,20 +135,7 @@ li{
 	padding: 15px 30px;
 }
 
-a{
-	text-align: center;
-	text-decoration: none;
-	color:black;
-	font-size: 1.2vw;
-}
-a.nothing{
-	
-}
 
-a:hover {
-	color: #F0c330;
-	transition: 0.5s;
-}
 
 /* Content */
 .tiazon-content{
